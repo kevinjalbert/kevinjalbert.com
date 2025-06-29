@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { calculateReadTimeFromMarkdown } from '../../utils/readTime';
+
+export async function getStaticPaths({ paginate }) {
+  // Get all blog posts
+  const blogPosts = await getCollection('blog');
+
+  // Sort by date (newest first)
+  const sortedPosts = blogPosts.sort((a, b) => {
+    const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+    const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+    return dateB.localeCompare(dateA);
+  });
+
+  // Return paginated paths
+  return paginate(sortedPosts, { pageSize: 5 });
+}
+
+const { page } = Astro.props;
+
+// Helper function to format dates
+function formatDate(id) {
+  const dateMatch = id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }) : '';
+}
+
+// Helper function to generate clean URL slug
+function getCleanSlug(post) {
+  return post.data.slug || post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Layout title={`Posts - Page ${page.currentPage} | Kevin Jalbert's Blog`} description="Browse all blog posts about software development and productivity">
+  <!-- Header with Inline Navigation -->
+  <div class="mb-6">
+    <div class="text-center mb-3">
+      <p class="text-lg text-gray-600">
+        Browse all {page.total} blog posts · Page {page.currentPage} of {page.lastPage}
+      </p>
+    </div>
+
+    <!-- Compact Navigation -->
+    <div class="flex items-center justify-between text-sm">
+      <div>
+        {page.currentPage === 2 ? (
+          <a href="/" class="text-gray-500 hover:text-gray-700 transition-colors">
+            ← Previous
+          </a>
+        ) : page.url.prev ? (
+          <a href={page.url.prev} class="text-gray-500 hover:text-gray-700 transition-colors">
+            ← Previous
+          </a>
+        ) : (
+          <div></div>
+        )}
+      </div>
+
+      <div>
+        {page.url.next ? (
+          <a href={page.url.next} class="text-gray-500 hover:text-gray-700 transition-colors">
+            Next →
+          </a>
+        ) : (
+          <div></div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Posts Grid -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div class="space-y-6">
+      {page.data.map((post) => {
+        const publishDate = formatDate(post.id);
+        const readTime = calculateReadTimeFromMarkdown(post.body);
+        const cleanSlug = getCleanSlug(post);
+
+        return (
+          <article class="border-b border-gray-100 last:border-b-0 pb-6 last:pb-0">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+              <h2 class="text-xl font-semibold flex-1 mb-1 sm:mb-0">
+                <a
+                  href={`/${cleanSlug}`}
+                  class="text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  {post.data.title}
+                </a>
+              </h2>
+              <div class="flex items-center text-sm text-gray-500 sm:ml-4 flex-shrink-0 space-x-2">
+                <time>{publishDate}</time>
+                <span>•</span>
+                <span>{readTime.text}</span>
+              </div>
+            </div>
+
+            {post.data.description && (
+              <p class="text-gray-600 mb-3">{post.data.description}</p>
+            )}
+
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map(tag => (
+                  <a
+                    href={`/tags/${tag}`}
+                    class="inline-block bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-md hover:bg-gray-200 transition-colors"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="mt-8 pt-6 border-t border-gray-200">
+      <div class="flex items-center justify-between mb-4">
+        <!-- Page Info -->
+        <div class="text-sm text-gray-600">
+          Showing {page.start + 1} to {page.end + 1} of {page.total} posts
+        </div>
+        <div class="text-sm text-gray-600">
+          Page {page.currentPage} of {page.lastPage}
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex items-center justify-between">
+        <div>
+          {page.currentPage === 2 ? (
+            <a
+              href="/"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
+            </a>
+          ) : page.url.prev && (
+            <a
+              href={page.url.prev}
+              class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
+            </a>
+          )}
+        </div>
+
+        <div>
+          {page.url.next && (
+            <a
+              href={page.url.next}
+              class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Next
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,29 +1,156 @@
-<h1 align="center">Welcome to kevinjalbert.github.io 👋</h1>
-<p>
-  <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">
-    <img alt="Code License: MIT" src="https://img.shields.io/badge/Code%20License-MIT-yellow.svg" target="_blank" />
-  </a>
-  <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">
-    <img alt="Content: Copyright" src="https://img.shields.io/badge/Content-Copyright-red.svg" target="_blank" />
-  </a>
-</p>
+# [Kevin Jalbert's Blog](https://kevinjalbert.com/)
 
-> Personal Website for Kevin Jalbert
+> A modern, fast blog built with [Astro](https://astro.build) focusing on software development, productivity, and technology insights.
 
-### 🏠 [Homepage](https://kevinjalbert.com/)
+## ✨ Features
 
-### Toubleshooting
+- **⚡ Ultra-Fast Performance**: Built with Astro 5 for optimal performance and static site generation
+- **🔍 Advanced Search**: Powered by Pagefind with keyboard shortcuts (`/` to search) and mobile-optimized interface
+- **🏷️ Smart Tag System**: Browse and filter posts by topics and categories
+- **📱 Responsive Design**: Beautiful, modern UI with Tailwind CSS and mobile-first approach
+- **🔗 Wiki-Style Linking**: Seamless internal linking between posts with custom remark plugins
+- **📡 RSS & Sitemap**: Stay updated with RSS feeds and SEO-optimized sitemaps
+- **⌨️ Keyboard Navigation**: Power user shortcuts for search and navigation
+- **📝 Obsidian Integration**: Complete content workflow with bidirectional sync
+- **🖼️ Image Optimization**: Automatic image processing and optimization through Astro
+- **🎨 Enhanced Typography**: Rich typography support with Tailwind Typography
+- **📋 Code Copy Feature**: One-click copy functionality for code blocks
+- **🔄 View Transitions**: Smooth page transitions with Astro's ViewTransitions API
 
-To install `bower`: `npm install -g bower`
+## 🚀 Project Structure
 
-From personal experience, there have been some issues getting `libv8` and `therubyracer` dependencies working together:
+Modern Astro project with content collections and integrated tooling:
 
-  - https://stackoverflow.com/a/29705230/583592
-  - https://gist.github.com/fernandoaleman/868b64cd60ab2d51ab24e7bf384da1ca#gistcomment-3152734
+```text
+kevinjalbert.github.io/
+├── src/
+│   ├── components/       # Reusable Astro components
+│   │   └── SearchModal.astro  # Advanced search modal with Pagefind
+│   ├── layouts/          # Page layouts with ViewTransitions
+│   │   └── Layout.astro  # Main layout with search, navigation, mobile menu
+│   ├── pages/            # File-based routing
+│   │   ├── [...page].astro    # Dynamic pagination
+│   │   ├── [...slug].astro    # Dynamic blog post routing
+│   │   ├── index.astro        # Homepage
+│   │   ├── rss.xml.js        # RSS feed generation
+│   │   ├── api/              # API routes
+│   │   ├── blog/             # Blog-specific pages
+│   │   ├── posts/            # Post listing pages
+│   │   └── tags/             # Tag-based filtering
+│   ├── styles/           # Global CSS and Tailwind
+│   │   └── global.css    # Base styles and utilities
+│   ├── utils/            # Utility functions
+│   │   ├── readTime.ts   # Reading time calculation
+│   │   └── search-index.ts    # Search indexing utilities
+│   └── content/          # Content collections (synced from Obsidian)
+│       ├── blog/         # Blog posts (markdown files)
+│       ├── pages/        # Static pages (about, now, etc.)
+│       ├── images/       # Images (optimized by Astro)
+│       └── config.ts     # Content collection schemas
+├── scripts/              # Content sync and utility scripts
+│   └── sync-content.sh   # Bidirectional Obsidian sync
+├── plugins/              # Custom Astro plugins
+│   └── remark-image-wikilinks.js  # Wiki-style image linking
+├── astro.config.mjs      # Astro configuration with integrations
+├── package.json          # Dependencies and scripts
+├── tailwind.config.js    # Main Tailwind CSS configuration with typography
+├── tailwind.config.mjs   # Duplicate Tailwind configuration (same as .js)
+└── tsconfig.json         # TypeScript configuration (strict mode)
+```
 
-The following also did it for me:
-  - brew install v8@3.15
-  - gem install libv8 -v '3.16.14.19' -- --with-system-v8
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command              | Action                                           |
+|:---------------------|:-------------------------------------------------|
+| `npm install`        | Install dependencies                             |
+| `npm run dev`        | Start development server                         |
+| `npm run build`      | Build site + generate search index with Pagefind |
+| `npm run preview`    | Preview the built site locally                   |
+| `npm run sync`       | Pull content from Obsidian vault                 |
+| `npm run sync:push`  | Push content back to Obsidian vault              |
+
+> **Note**: The search functionality requires a production build (`npm run build`) to work properly as it depends on Pagefind indexing.
+
+## 🛠️ Tech Stack & Dependencies
+
+### Core Framework
+
+- **[Astro](https://astro.build)** - Static site generator with content collections
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety with strict mode enabled
+
+### Integrations & Plugins
+
+- **[@astrojs/tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/)** - Utility-first CSS framework
+- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** - Automatic sitemap generation
+- **[@astrojs/rss](https://docs.astro.build/en/guides/rss/)** - RSS feed generation
+- **[remark-wiki-link](https://github.com/landakram/remark-wiki-link)** - Wiki-style internal linking
+- **Custom remark plugins** - Enhanced image linking and processing
+
+### Search & Discovery
+
+- **[Pagefind](https://pagefind.app/)** - Fast, low-bandwidth search indexing
+- **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)** - Beautiful typography styles
+
+### Content Management
+
+- **Obsidian Integration** - Bidirectional content sync workflow using `rsync`
+
+## 🛠️ Development Workflow
+
+### Quick Start
+
+1. **Install dependencies**: `npm install`
+2. **Sync content from Obsidian**: `npm run sync`
+3. **Start development**: `npm run dev`
+4. **Build for production**: `npm run build`
+
+### Content Management with Obsidian
+
+This project features seamless integration with Obsidian for content creation and management through automated sync scripts.
+
+#### Content Sync Workflow
+
+Use the built-in sync commands to manage content between your Obsidian vault and the project:
+
+```bash
+# Pull content from Obsidian to project (standard workflow)
+npm run sync
+
+# Push content from project back to Obsidian (if needed)
+npm run sync:push
+```
+
+#### Complete Workflow
+
+1. **Create in Obsidian**: Write and edit blog posts in your Obsidian vault with full markdown support
+2. **Sync to Project**: Run `npm run sync` to pull content into the Astro project structure
+3. **Develop & Test**: Use standard Astro development workflow (`npm run dev`) with hot reloading
+4. **Build & Deploy**: Use `npm run build` to create production build with Pagefind search indexing
+5. **Optional Push Back**: Use `npm run sync:push` to sync changes back to Obsidian vault
+
+### Development Features
+
+- **Hot Reloading**:
+  - Source files (components, layouts, styles) → instant updates
+  - Content files (blog posts, pages) → automatic refresh
+  - Config changes → restart dev server
+- **TypeScript**: Strict mode enabled with full type checking
+- **Search Indexing**: Automatically built during production builds (requires `npm run build`)
+- **Mobile-First**: Responsive design with mobile navigation and search
+
+> **Note**: There are duplicate Tailwind configuration files (`tailwind.config.js` and `tailwind.config.mjs`) with identical content. Consider removing one to avoid confusion.
+
+## 🔍 Search & Navigation Features
+
+- **Keyboard Shortcuts**: Press `/` to open search from anywhere
+- **Mobile Optimized**: Touch-friendly search interface with swipe navigation
+- **Tag Browsing**: Discover content by topics at `/tags`
+- **RSS Feed**: Subscribe to updates at `/rss.xml`
+- **Automatic Sitemap**: SEO-optimized site structure
+- **Reading Time**: Calculated automatically for each post
+- **Wiki Links**: Internal post linking with `[[Post Title]]` syntax
 
 ## Show your support
 
@@ -31,7 +158,4 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-This project is [MIT](https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+This project is [MIT](https://github.com/kevinjalbert/kevinjalbert.github.io/blob/main/LICENSE) licensed.

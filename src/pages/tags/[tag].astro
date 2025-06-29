@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { calculateReadTimeFromMarkdown } from '../../utils/readTime';
+
+export async function getStaticPaths() {
+  // Get all blog posts
+  const blogPosts = await getCollection('blog');
+
+  // Collect all unique tags
+  const allTags = new Set();
+  blogPosts.forEach(post => {
+    if (post.data.tags) {
+      post.data.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+
+  // Generate paths for each tag
+  return Array.from(allTags).map(tag => {
+    // Filter posts that have this tag
+    const tagPosts = blogPosts.filter(post =>
+      post.data.tags && post.data.tags.includes(tag)
+    );
+
+    // Sort by date (newest first)
+    const sortedPosts = tagPosts.sort((a, b) => {
+      const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+      const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+      return dateB.localeCompare(dateA);
+    });
+
+    return {
+      params: { tag: tag },
+      props: {
+        tag,
+        posts: sortedPosts
+      }
+    };
+  });
+}
+
+const { tag, posts } = Astro.props;
+
+// Helper function to format dates
+function formatDate(id) {
+  const dateMatch = id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }) : '';
+}
+
+// Helper function to generate clean URL slug
+function getCleanSlug(post) {
+  return post.data.slug || post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Layout title={`Posts tagged "${tag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${tag}"`}>
+  <!-- Header -->
+  <div class="mb-6">
+    <div class="text-center mb-6">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">
+        Posts tagged with <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-3xl">"{tag}"</span>
+      </h1>
+      <p class="text-lg text-gray-600">
+        {posts.length} {posts.length === 1 ? 'post' : 'posts'} found
+      </p>
+    </div>
+  </div>
+
+  <!-- Posts List -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div class="space-y-6">
+      {posts.map((post) => {
+        const publishDate = formatDate(post.id);
+        const readTime = calculateReadTimeFromMarkdown(post.body);
+        const cleanSlug = getCleanSlug(post);
+
+        return (
+          <article class="border-b border-gray-100 last:border-b-0 pb-6 last:pb-0">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+              <h2 class="text-xl font-semibold flex-1 mb-1 sm:mb-0">
+                <a
+                  href={`/${cleanSlug}`}
+                  class="text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  {post.data.title}
+                </a>
+              </h2>
+              <div class="flex items-center text-sm text-gray-500 sm:ml-4 flex-shrink-0 space-x-2">
+                <time>{publishDate}</time>
+                <span>•</span>
+                <span>{readTime.text}</span>
+              </div>
+            </div>
+
+            {post.data.description && (
+              <p class="text-gray-600 mb-3">{post.data.description}</p>
+            )}
+
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map(postTag => (
+                  <a
+                    href={`/tags/${postTag}`}
+                    class={`inline-block text-sm px-2 py-1 rounded-md transition-colors ${
+                      postTag === tag
+                        ? 'bg-blue-100 text-blue-800 font-medium'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {postTag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</Layout>

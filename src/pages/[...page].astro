@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const pageEntries = await getCollection('pages');
+  return pageEntries.map(entry => ({
+    params: { page: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+  <!-- Page Title - Outside the white content box -->
+  <div class="text-center mb-8">
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">{entry.data.title}</h1>
+  </div>
+
+  <article class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8">
+    <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-links:text-blue-600 hover:prose-links:text-blue-800 prose-img:rounded-lg prose-img:shadow-md">
+      <Content />
+    </div>
+  </article>
+</Layout>

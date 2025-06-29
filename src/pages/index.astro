@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { calculateReadTimeFromMarkdown } from '../utils/readTime';
+
+// Get all blog posts
+const blogPosts = await getCollection('blog');
+
+// Sort by date (newest first) - we'll need to extract date from filename
+const sortedPosts = blogPosts.sort((a, b) => {
+  // Extract date from filename (YYYY-MM-DD format)
+  const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+  const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
+  return dateB.localeCompare(dateA);
+});
+
+// Show only first 5 posts on the home page
+const recentPosts = sortedPosts.slice(0, 5);
+const totalPosts = sortedPosts.length;
+
+// Helper function to format dates and calculate read times
+function formatDate(id) {
+  const dateMatch = id.match(/^(\d{4}-\d{2}-\d{2})/);
+  return dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }) : '';
+}
+
+// Helper function to generate clean URL slug
+function getCleanSlug(post) {
+  return post.data.slug || post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+---
+
+<Layout title="Kevin Jalbert's Blog" description="Personal blog about software development and productivity">
+  <!-- Hero Section -->
+  <div class="text-center mb-6">
+    <p class="text-lg text-gray-600">
+      Thoughts and insights on software development, productivity, and technology.
+    </p>
+  </div>
+
+  <!-- Top Navigation (Minimal) -->
+  <div class="flex items-center justify-between text-sm mb-6">
+    <div>
+      <!-- No previous on homepage -->
+    </div>
+    <div>
+      <!-- No page indicator needed on homepage -->
+    </div>
+    <div>
+      {totalPosts > 5 && (
+        <a href="/posts/2" class="text-gray-500 hover:text-gray-700 transition-colors">
+          Next →
+        </a>
+      )}
+    </div>
+  </div>
+
+  <!-- Recent Posts Section -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <div class="space-y-6">
+      {recentPosts.map((post) => {
+        const publishDate = formatDate(post.id);
+        const readTime = calculateReadTimeFromMarkdown(post.body);
+        const cleanSlug = getCleanSlug(post);
+
+        return (
+          <article class="border-b border-gray-100 last:border-b-0 pb-6 last:pb-0">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+              <h3 class="text-xl font-semibold flex-1 mb-1 sm:mb-0">
+                <a
+                  href={`/${cleanSlug}`}
+                  class="text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  {post.data.title}
+                </a>
+              </h3>
+              {publishDate && (
+                <div class="flex items-center text-sm text-gray-500 sm:ml-4 flex-shrink-0 space-x-2">
+                  <time>{publishDate}</time>
+                  <span>•</span>
+                  <span>{readTime.text}</span>
+                </div>
+              )}
+            </div>
+            {post.data.description && (
+              <p class="text-gray-600 mb-3">{post.data.description}</p>
+            )}
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map(tag => (
+                  <a
+                    href={`/tags/${tag}`}
+                    class="inline-block bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-md hover:bg-gray-200 transition-colors"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- Bottom Pagination (Detailed) -->
+    {totalPosts > 5 && (
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-4">
+          <!-- Page Info -->
+          <div class="text-sm text-gray-600">
+            Showing 1 to {recentPosts.length} of {totalPosts} posts
+          </div>
+          <div class="text-sm text-gray-600">
+            Page 1 of {Math.ceil(totalPosts / 5)}
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex items-center justify-between">
+          <div>
+            <!-- No previous on homepage -->
+          </div>
+
+          <div>
+            <a
+              href="/posts/2"
+              class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            >
+              Next
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</Layout>

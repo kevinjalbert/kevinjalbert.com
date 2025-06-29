@@ -1,0 +1,455 @@
+---
+import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
+import SearchModal from '../components/SearchModal.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || "Kevin Jalbert's Blog"} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Kevin Jalbert's Blog" href="/rss.xml" />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body class="bg-gray-50 font-sans antialiased">
+    <div class="min-h-screen flex flex-col">
+      <!-- Header -->
+      <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16 min-h-[64px]">
+            <div class="flex items-center">
+              <a href="/" class="text-xl font-bold text-gray-600 hover:text-gray-900 transition-colors underline decoration-gray-300 hover:decoration-gray-600 underline-offset-4">
+                Kevin Jalbert
+              </a>
+            </div>
+            <nav class="hidden md:flex space-x-8 items-center">
+              <a href="/about" class="text-gray-600 hover:text-gray-900 transition-colors underline decoration-gray-300 hover:decoration-gray-600 underline-offset-4">About</a>
+              <a href="/now" class="text-gray-600 hover:text-gray-900 transition-colors underline decoration-gray-300 hover:decoration-gray-600 underline-offset-4">Now</a>
+              <a href="/tags" class="text-gray-600 hover:text-gray-900 transition-colors underline decoration-gray-300 hover:decoration-gray-600 underline-offset-4">Tags</a>
+              <button
+                id="search-trigger"
+                class="flex items-center text-gray-600 hover:text-gray-900 transition-colors bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md text-sm"
+                title="Search (press / to search)"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Search
+                <kbd class="ml-2 text-xs text-gray-500 bg-white px-1 py-0.5 rounded border">/</kbd>
+              </button>
+            </nav>
+            <!-- Mobile buttons -->
+            <div class="md:hidden flex items-center space-x-1">
+              <!-- Mobile search button -->
+              <button
+                id="mobile-search-trigger"
+                class="flex items-center justify-center text-gray-600 hover:text-gray-900 transition-colors p-2 rounded-md hover:bg-gray-100"
+                title="Search"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span class="sr-only">Search</span>
+              </button>
+
+              <!-- Mobile menu button -->
+              <button
+                id="mobile-menu-button"
+                type="button"
+                class="flex items-center justify-center text-gray-600 hover:text-gray-900 transition-colors p-2 rounded-md hover:bg-gray-100"
+                aria-expanded="false"
+              >
+                <span class="sr-only">Open menu</span>
+                <svg id="menu-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg id="close-icon" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile menu -->
+          <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+              <a href="/about" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">About</a>
+              <a href="/now" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">Now</a>
+              <a href="/tags" class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">Tags</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main content -->
+      <main class="flex-1">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <slot />
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div class="flex justify-center items-center">
+            <p class="text-center text-gray-600 text-sm">
+              &copy; 2025 Kevin Jalbert. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+    // Simple and reliable UI initialization that works with View Transitions
+    (function() {
+      // Global functions that persist across page transitions
+      window.openSearch = function() {
+        const modal = document.getElementById('search-modal');
+        const input = document.getElementById('search-input');
+        if (modal && input) {
+          modal.classList.remove('hidden');
+          input.focus();
+          document.body.style.overflow = 'hidden';
+        }
+      };
+
+      window.closeSearch = function() {
+        const modal = document.getElementById('search-modal');
+        const input = document.getElementById('search-input');
+        const resultsContainer = document.getElementById('search-results');
+
+        if (modal && input && resultsContainer) {
+          modal.classList.add('hidden');
+          input.value = '';
+          document.body.style.overflow = '';
+          resultsContainer.innerHTML = '<div id="search-empty" class="p-6 sm:p-8 text-center text-gray-500 text-sm">Start typing to search articles...</div>';
+          // Reset keyboard navigation state when closing
+          if (window.resetSearchSelection) window.resetSearchSelection();
+        }
+      };
+
+      // Global function to reset search selection state
+      window.resetSearchSelection = function() {
+        if (window._searchSelectedIndex !== undefined) {
+          window._searchSelectedIndex = -1;
+        }
+      };
+
+      function initUI() {
+
+        // Mobile Menu Functionality
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+
+        if (btn && menu) {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const isHidden = menu.classList.contains('hidden');
+
+            if (isHidden) {
+              menu.classList.remove('hidden');
+              btn.setAttribute('aria-expanded', 'true');
+              document.getElementById('menu-icon')?.classList.add('hidden');
+              document.getElementById('close-icon')?.classList.remove('hidden');
+            } else {
+              menu.classList.add('hidden');
+              btn.setAttribute('aria-expanded', 'false');
+              document.getElementById('menu-icon')?.classList.remove('hidden');
+              document.getElementById('close-icon')?.classList.add('hidden');
+            }
+          });
+
+          // Close menu when clicking outside
+          document.addEventListener('click', function(e) {
+            if (!btn.contains(e.target) && !menu.contains(e.target) && !menu.classList.contains('hidden')) {
+              menu.classList.add('hidden');
+              btn.setAttribute('aria-expanded', 'false');
+              document.getElementById('menu-icon')?.classList.remove('hidden');
+              document.getElementById('close-icon')?.classList.add('hidden');
+            }
+          });
+
+          // Close menu when clicking links
+          menu.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+              menu.classList.add('hidden');
+              btn.setAttribute('aria-expanded', 'false');
+              document.getElementById('menu-icon')?.classList.remove('hidden');
+              document.getElementById('close-icon')?.classList.add('hidden');
+            }
+          });
+        }
+
+        // Search Event Listeners
+        const searchTrigger = document.getElementById('search-trigger');
+        const mobileSearchTrigger = document.getElementById('mobile-search-trigger');
+        const closeBtn = document.getElementById('search-close');
+        const modal = document.getElementById('search-modal');
+
+        if (searchTrigger) {
+          searchTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.openSearch();
+          });
+        }
+
+        if (mobileSearchTrigger) {
+          mobileSearchTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.openSearch();
+          });
+        }
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.closeSearch();
+          });
+        }
+
+        if (modal) {
+          modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+              window.closeSearch();
+            }
+          });
+        }
+
+        // Search input event handler
+        const input = document.getElementById('search-input');
+        if (input && !input._searchListenersAttached) {
+          let searchTimeout;
+
+          // Initialize global search state
+          if (window._searchSelectedIndex === undefined) {
+            window._searchSelectedIndex = -1;
+          }
+
+          input.addEventListener('input', function(e) {
+            window._searchSelectedIndex = -1; // Reset selection on new input
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+              if (window.performSearch) {
+                window.performSearch(e.target.value);
+              }
+            }, 300);
+          });
+
+          // Handle keyboard navigation
+          input.addEventListener('keydown', function(e) {
+            const results = document.querySelectorAll('.search-result');
+
+            if (results.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              window._searchSelectedIndex = Math.min(window._searchSelectedIndex + 1, results.length - 1);
+              updateSelection(results, window._searchSelectedIndex);
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              window._searchSelectedIndex = Math.max(window._searchSelectedIndex - 1, -1);
+              updateSelection(results, window._searchSelectedIndex);
+            } else if (e.key === 'Enter' && window._searchSelectedIndex >= 0) {
+              e.preventDefault();
+              results[window._searchSelectedIndex].click();
+            }
+          });
+
+          // Mark that listeners have been attached
+          input._searchListenersAttached = true;
+
+          // Helper function to update visual selection
+          function updateSelection(results, index) {
+            results.forEach((result, i) => {
+              if (i === index) {
+                result.classList.add('bg-blue-50', 'border-l-blue-500');
+                result.classList.remove('hover:bg-gray-50', 'border-l-transparent');
+                // Scroll result into view if needed
+                result.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+              } else {
+                result.classList.remove('bg-blue-50', 'border-l-blue-500');
+                result.classList.add('hover:bg-gray-50', 'border-l-transparent');
+              }
+            });
+          }
+        }
+      }
+
+      // Initialize immediately when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initUI);
+      } else {
+        initUI();
+      }
+
+      // Re-initialize after each View Transition
+      document.addEventListener('astro:page-load', initUI);
+
+      // One-time setup for global keyboard shortcuts (these persist across transitions)
+      if (!window._globalKeyboardSetup) {
+        document.addEventListener('keydown', function(e) {
+          if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+            e.preventDefault();
+            window.openSearch();
+          } else if (e.key === 'Escape') {
+            const modal = document.getElementById('search-modal');
+            if (modal && !modal.classList.contains('hidden')) {
+              e.preventDefault();
+              window.closeSearch();
+            }
+          }
+        });
+        window._globalKeyboardSetup = true;
+      }
+    })();
+
+    // Lazy load advanced functionality
+    function initAdvancedFeatures() {
+      // Initialize Pagefind for search (only needs to be done once)
+      if (!window.initPagefind) {
+        window.initPagefind = async function() {
+          if (window._pagefind) return true;
+
+          try {
+            const pagefindUrl = '/pagefind/pagefind.js';
+            const pagefindModule = await import(/* @vite-ignore */ pagefindUrl);
+            if (pagefindModule) {
+              window._pagefind = pagefindModule;
+              await window._pagefind.init();
+            }
+          } catch (error) {
+            console.error('Pagefind not available:', error);
+            return false;
+          }
+          return true;
+        };
+      }
+
+      // Search functionality (only needs to be defined once)
+      if (!window.performSearch) {
+        window.performSearch = async function(query) {
+          const resultsContainer = document.getElementById('search-results');
+          if (!resultsContainer) return;
+
+          if (!query.trim()) {
+            resultsContainer.innerHTML = '<div id="search-empty" class="p-6 sm:p-8 text-center text-gray-500 text-sm">Start typing to search articles...</div>';
+            // Reset keyboard navigation state
+            if (window.resetSearchSelection) window.resetSearchSelection();
+            return;
+          }
+
+          const isPagefindReady = await window.initPagefind();
+          if (!isPagefindReady) {
+            resultsContainer.innerHTML = '<div class="p-6 sm:p-8 text-center text-yellow-600 text-sm">Search is only available in production builds</div>';
+            return;
+          }
+
+          try {
+            const search = await window._pagefind.search(query);
+            const results = search.results.slice(0, 8);
+
+            if (results.length === 0) {
+              resultsContainer.innerHTML = `<div class="p-6 sm:p-8 text-center text-gray-500 text-sm">No articles found for "${query}"</div>`;
+              // Reset keyboard navigation state
+              if (window.resetSearchSelection) window.resetSearchSelection();
+              return;
+            }
+
+            const resultsData = await Promise.all(results.map(result => result.data()));
+
+            const fragment = document.createDocumentFragment();
+            resultsData.forEach((data) => {
+              const div = document.createElement('div');
+              div.className = 'search-result p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors border-l-2 border-l-transparent';
+
+              const dateMatch = data.url.match(/\/(\d{4}-\d{2}-\d{2})/);
+              const date = dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'short', day: 'numeric'
+              }) : '';
+
+              div.innerHTML = `
+                <h3 class="font-medium text-gray-900 text-sm mb-1">${data.meta?.title || 'Untitled'}</h3>
+                ${date ? `<span class="text-xs text-gray-500">${date}</span>` : ''}
+                <p class="text-xs text-gray-500 line-clamp-2">${data.excerpt}</p>
+              `;
+
+              div.addEventListener('click', () => window.location.href = data.url);
+              fragment.appendChild(div);
+            });
+
+            resultsContainer.innerHTML = '';
+            resultsContainer.appendChild(fragment);
+
+            // Reset keyboard navigation state for new results
+            if (window.resetSearchSelection) window.resetSearchSelection();
+
+          } catch (error) {
+            console.error('Search error:', error);
+            resultsContainer.innerHTML = '<div class="p-6 sm:p-8 text-center text-red-500 text-sm">Search temporarily unavailable.</div>';
+          }
+        };
+      }
+
+      // Add copy buttons to code blocks (needs to run on each page)
+      addCopyButtons();
+    }
+
+    function addCopyButtons() {
+      setTimeout(() => {
+        const preElements = document.querySelectorAll('.prose pre');
+
+        preElements.forEach(pre => {
+          if (pre.querySelector('.copy-button')) return;
+
+          const button = document.createElement('button');
+          button.className = 'copy-button';
+          button.textContent = 'Copy';
+          button.setAttribute('aria-label', 'Copy code to clipboard');
+
+          button.addEventListener('click', async () => {
+            const code = pre.querySelector('code');
+            if (!code) return;
+
+            try {
+              await navigator.clipboard.writeText(code.textContent);
+              button.textContent = 'Copied!';
+              button.classList.add('copied');
+
+              setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+              }, 2000);
+            } catch (err) {
+              console.warn('Failed to copy text:', err);
+              button.textContent = 'Failed';
+              setTimeout(() => {
+                button.textContent = 'Copy';
+              }, 2000);
+            }
+          });
+
+          pre.appendChild(button);
+        });
+      }, 100);
+    }
+
+    // Initialize advanced features on load and after each navigation
+    window.addEventListener('load', initAdvancedFeatures);
+    document.addEventListener('astro:page-load', addCopyButtons);
+    </script>
+
+    <!-- Search Modal -->
+    <SearchModal />
+  </body>
+</html>

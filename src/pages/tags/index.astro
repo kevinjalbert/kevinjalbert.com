@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts
+const blogPosts = await getCollection('blog');
+
+// Collect all tags with their post counts
+const tagCounts = new Map();
+blogPosts.forEach(post => {
+  if (post.data.tags) {
+    post.data.tags.forEach(tag => {
+      tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+    });
+  }
+});
+
+// Sort tags alphabetically and create array with counts
+const sortedTags = Array.from(tagCounts.entries())
+  .sort(([tagA], [tagB]) => tagA.localeCompare(tagB))
+  .map(([tag, count]) => ({ tag, count }));
+---
+
+<Layout title="All Tags | Kevin Jalbert's Blog" description="Browse all tags and topics covered in the blog">
+  <!-- Header -->
+  <div class="text-center mb-6">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">All Tags</h1>
+    <p class="text-lg text-gray-600">
+      {sortedTags.length} tags across {blogPosts.length} articles
+    </p>
+  </div>
+
+  <!-- Tags Cloud -->
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+    <div class="flex flex-wrap gap-3 justify-center items-baseline">
+      {sortedTags.map(({ tag, count }) => {
+        // Scale tag size based on post count (min 1, max 3 scale for better consistency)
+        const scale = Math.min(3, Math.max(1, Math.ceil(count / 3)));
+        const sizeClasses = {
+          1: 'text-sm px-3 py-1.5',
+          2: 'text-base px-3 py-2',
+          3: 'text-lg px-4 py-2'
+        };
+
+        return (
+          <a
+            href={`/tags/${tag}`}
+            class={`inline-flex items-center bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors font-medium ${sizeClasses[scale]}`}
+            title={`${count} ${count === 1 ? 'post' : 'posts'}`}
+          >
+            <span>{tag}</span>
+            <span class="ml-1.5 text-blue-600 opacity-75 text-xs bg-blue-200 px-1.5 py-0.5 rounded-full">
+              {count}
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Tags List (Alternative View) -->
+  <div class="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Alphabetical</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      {sortedTags.map(({ tag, count }) => (
+        <a
+          href={`/tags/${tag}`}
+          class="flex justify-between items-center p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors min-h-[44px]"
+        >
+          <span class="font-medium text-gray-900 truncate">{tag}</span>
+          <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full ml-2 flex-shrink-0">
+            {count}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
