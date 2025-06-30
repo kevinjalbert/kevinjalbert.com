@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 import SearchModal from '../components/SearchModal.astro';
 
 interface Props {
@@ -20,8 +20,18 @@ const { title, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Kevin Jalbert's Blog" href="/rss.xml" />
     <title>{title}</title>
-    <ViewTransitions />
+
+    <!-- Rybbit Tracking Snippet -->
+    <script
+      src="https://analytics.jalbert.party/api/script.js"
+      data-site-id=1
+      async
+      defer
+    ></script>
+
+    <ClientRouter />
   </head>
+
   <body class="bg-gray-50 font-sans antialiased">
     <div class="min-h-screen flex flex-col">
       <!-- Header -->
@@ -114,26 +124,44 @@ const { title, description } = Astro.props;
     // Simple and reliable UI initialization that works with View Transitions
     (function() {
       // Global functions that persist across page transitions
-      window.openSearch = function() {
+      window.openSearch = function(source = 'search_button') {
         const modal = document.getElementById('search-modal');
         const input = document.getElementById('search-input');
         if (modal && input) {
           modal.classList.remove('hidden');
           input.focus();
           document.body.style.overflow = 'hidden';
+
+          // Track search modal opened
+          if (window.rybbit) {
+            window.rybbit.event('search_modal_opened', { source });
+          }
         }
       };
 
-      window.closeSearch = function() {
+      window.closeSearch = function(source = 'search_button') {
         const modal = document.getElementById('search-modal');
         const input = document.getElementById('search-input');
         const resultsContainer = document.getElementById('search-results');
 
         if (modal && input && resultsContainer) {
           modal.classList.add('hidden');
+          const query = input.value;
           input.value = '';
           document.body.style.overflow = '';
           resultsContainer.innerHTML = '<div id="search-empty" class="p-6 sm:p-8 text-center text-gray-500 text-sm">Start typing to search articles...</div>';
+
+          // Track search modal closed
+          if (window.rybbit && query.trim()) {
+            window.rybbit.event('search_modal_closed', {
+              had_query: true,
+              query_length: query.length,
+              source
+            });
+          } else if (window.rybbit) {
+            window.rybbit.event('search_modal_closed', { had_query: false, source });
+          }
+
           // Reset keyboard navigation state when closing
           if (window.resetSearchSelection) window.resetSearchSelection();
         }
@@ -262,7 +290,17 @@ const { title, description } = Astro.props;
               updateSelection(results, window._searchSelectedIndex);
             } else if (e.key === 'Enter' && window._searchSelectedIndex >= 0) {
               e.preventDefault();
-              results[window._searchSelectedIndex].click();
+              const selectedResult = results[window._searchSelectedIndex];
+
+              // Track keyboard navigation result selection
+              if (window.rybbit && selectedResult) {
+                window.rybbit.event('search_result_selected_keyboard', {
+                  result_position: window._searchSelectedIndex + 1,
+                  navigation_method: 'keyboard'
+                });
+              }
+
+              selectedResult.click();
             }
           });
 
@@ -301,12 +339,12 @@ const { title, description } = Astro.props;
         document.addEventListener('keydown', function(e) {
           if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
             e.preventDefault();
-            window.openSearch();
+            window.openSearch('keyboard_shortcut');
           } else if (e.key === 'Escape') {
             const modal = document.getElementById('search-modal');
             if (modal && !modal.classList.contains('hidden')) {
               e.preventDefault();
-              window.closeSearch();
+              window.closeSearch('keyboard_shortcut');
             }
           }
         });
@@ -359,6 +397,15 @@ const { title, description } = Astro.props;
             const search = await window._pagefind.search(query);
             const results = search.results.slice(0, 8);
 
+            // Track search performed
+            if (window.rybbit) {
+              window.rybbit.event('search_performed', {
+                query_length: query.length,
+                results_count: results.length,
+                has_results: results.length > 0
+              });
+            }
+
             if (results.length === 0) {
               resultsContainer.innerHTML = `<div class="p-6 sm:p-8 text-center text-gray-500 text-sm">No articles found for "${query}"</div>`;
               // Reset keyboard navigation state
@@ -369,7 +416,7 @@ const { title, description } = Astro.props;
             const resultsData = await Promise.all(results.map(result => result.data()));
 
             const fragment = document.createDocumentFragment();
-            resultsData.forEach((data) => {
+            resultsData.forEach((data, index) => {
               const div = document.createElement('div');
               div.className = 'search-result p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors border-l-2 border-l-transparent';
 
@@ -384,7 +431,18 @@ const { title, description } = Astro.props;
                 <p class="text-xs text-gray-500 line-clamp-2">${data.excerpt}</p>
               `;
 
-              div.addEventListener('click', () => window.location.href = data.url);
+              div.addEventListener('click', () => {
+                // Track search result clicked
+                if (window.rybbit) {
+                  window.rybbit.event('search_result_clicked', {
+                    result_position: index + 1,
+                    result_url: data.url,
+                    result_title: data.meta?.title || 'Untitled',
+                    query_length: query.length
+                  });
+                }
+                window.location.href = data.url;
+              });
               fragment.appendChild(div);
             });
 
@@ -447,6 +505,13 @@ const { title, description } = Astro.props;
     // Initialize advanced features on load and after each navigation
     window.addEventListener('load', initAdvancedFeatures);
     document.addEventListener('astro:page-load', addCopyButtons);
+
+    // Rybbit tracking for View Transitions
+    document.addEventListener('astro:after-swap', () => {
+      if (window.rybbit?.pageview) {
+        window.rybbit.pageview();
+      }
+    });
     </script>
 
     <!-- Search Modal -->
