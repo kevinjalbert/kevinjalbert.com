@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/kevinjalbert
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://kevinjalbert.com
+  * I am kevinjalbert (https://keybase.io/kevinjalbert) on keybase.
+  * I have a public key ASC6kzkAbZoJpYqwvGzDKjH2ScSQJVbyMr2oKAqspwGQOQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01205a234d0fcc28df9b7dd6d3dee3d4e9590411d96a16cb4d5dd35d74a7153ec9b20a",
+      "host": "keybase.io",
+      "kid": "0120ba9339006d9a09a58ab0bc6cc32a31f649c4902556f232bda8280aaca70190390a",
+      "uid": "291c63e3fe6b079d28b49c4224eca919",
+      "username": "kevinjalbert"
+    },
+    "merkle_root": {
+      "ctime": 1751335100,
+      "hash": "29c6a760f5cb16e0ce4aec1d63597b75fae3932e92c6284c79a3909d1eb337d2935221d1f715d9d4bb4d5b4c33d7f89c08f6219f4a2f6b739d22b00187ecab30",
+      "hash_meta": "9aafee83f6a11b512adff12a37fc9e17838584f80a443773ee330f6c5ac6ace5",
+      "seqno": 26911369
+    },
+    "service": {
+      "entropy": "8fUsjo8q4Mk3YoGtI19delE1",
+      "hostname": "kevinjalbert.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.3.0"
+  },
+  "ctime": 1751335129,
+  "expire_in": 504576000,
+  "prev": "010f4a34f370dfe07333bf8dec2020bc926864bf24da0fd8bfda9c1d758a1f6b",
+  "seqno": 78,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgupM5AG2aCaWKsLxswyox9knEkCVW8jK9qCgKrKcBkDkKp3BheWxvYWTESpcCTsQgAQ9KNPNw3+BzM7+N7CAgvJJoZL8k2g/Yv9qcHXWKH2vEIAm4RBDhAe+pPby57fplaak3UruBkvX0LB6kUOVCVdqQAgHCo3NpZ8RAqmNC1grvqi5EJy56Y+Y+fuYfcs3YdHTEsa80XCresYUCfg15Y/prokl0Myg1uKnYxfjgbBbUiOPWxUZCnKUmBahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIOCrJBH2WVo4L88nzYgH6n8hLRmM8xmcqJvPvtJLhHp1o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kevinjalbert
+
+==================================================================
