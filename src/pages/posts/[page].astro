@@ -7,11 +7,11 @@ export async function getStaticPaths({ paginate }) {
   // Get all blog posts
   const blogPosts = await getCollection('blog');
 
-  // Sort by date (newest first)
+  // Sort by date (newest first) using pubDate from frontmatter
   const sortedPosts = blogPosts.sort((a, b) => {
-    const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-    const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-    return dateB.localeCompare(dateA);
+    const dateA = new Date(a.data.pubDate);
+    const dateB = new Date(b.data.pubDate);
+    return dateB.getTime() - dateA.getTime();
   });
 
   // Return paginated paths
@@ -21,18 +21,17 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 
 // Helper function to format dates
-function formatDate(id) {
-  const dateMatch = id.match(/^(\d{4}-\d{2}-\d{2})/);
-  return dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+function formatDate(pubDate) {
+  return new Date(pubDate).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }) : '';
+  });
 }
 
-// Helper function to generate clean URL slug
+// Helper function to generate clean URL id
 function getCleanSlug(post) {
-  return post.data.slug || post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  return post.data.permalink || post.id;
 }
 ---
 
@@ -77,7 +76,7 @@ function getCleanSlug(post) {
   <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
     <div class="space-y-6">
       {page.data.map((post) => {
-        const publishDate = formatDate(post.id);
+        const publishDate = formatDate(post.data.pubDate);
         const readTime = calculateReadTimeFromMarkdown(post.body);
         const cleanSlug = getCleanSlug(post);
 
@@ -107,7 +106,7 @@ function getCleanSlug(post) {
               <div class="flex flex-wrap gap-2">
                 {post.data.tags.map(tag => (
                   <a
-                    href={`/tags/${tag}`}
+                    href={`/tags/${encodeURIComponent(tag)}`}
                     class="inline-block bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-md hover:bg-gray-200 transition-colors"
                   >
                     {tag}

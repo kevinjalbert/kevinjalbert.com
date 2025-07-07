@@ -16,53 +16,72 @@ export async function getStaticPaths() {
   });
 
   // Generate paths for each tag
-  return Array.from(allTags).map(tag => {
+  const paths = [];
+
+  Array.from(allTags).forEach(tag => {
     // Filter posts that have this tag
     const tagPosts = blogPosts.filter(post =>
       post.data.tags && post.data.tags.includes(tag)
     );
 
-    // Sort by date (newest first)
+    // Sort by date (newest first) using pubDate from frontmatter
     const sortedPosts = tagPosts.sort((a, b) => {
-      const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-      const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-      return dateB.localeCompare(dateA);
+      const dateA = new Date(a.data.pubDate);
+      const dateB = new Date(b.data.pubDate);
+      return dateB.getTime() - dateA.getTime();
     });
 
-    return {
-      params: { tag: tag },
+    // For static build, use encoded version
+    paths.push({
+      params: { tag: encodeURIComponent(tag) },
       props: {
         tag,
         posts: sortedPosts
       }
-    };
+    });
+
+    // For development, also add unencoded version if different
+    if (encodeURIComponent(tag) !== tag) {
+      paths.push({
+        params: { tag: tag },
+        props: {
+          tag,
+          posts: sortedPosts
+        }
+      });
+    }
   });
+
+  return paths;
 }
 
 const { tag, posts } = Astro.props;
 
+// Handle both encoded and unencoded tag parameters
+// In development, Astro.params.tag might be encoded, in build it uses our props
+const currentTag = Astro.params.tag ? decodeURIComponent(Astro.params.tag) : tag;
+
 // Helper function to format dates
-function formatDate(id) {
-  const dateMatch = id.match(/^(\d{4}-\d{2}-\d{2})/);
-  return dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+function formatDate(pubDate) {
+  return new Date(pubDate).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }) : '';
+  });
 }
 
 // Helper function to generate clean URL slug
 function getCleanSlug(post) {
-  return post.data.slug || post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  return post.data.permalink;
 }
 ---
 
-<Layout title={`Posts tagged "${tag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${tag}"`}>
+<Layout title={`Posts tagged "${currentTag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${currentTag}"`}>
   <!-- Header -->
   <div class="mb-6">
     <div class="text-center mb-6">
       <h1 class="text-4xl font-bold text-gray-900 mb-2">
-        Posts tagged with <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-3xl">"{tag}"</span>
+        Posts tagged with <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-3xl">"{currentTag}"</span>
       </h1>
       <p class="text-lg text-gray-600">
         {posts.length} {posts.length === 1 ? 'post' : 'posts'} found
@@ -74,7 +93,7 @@ function getCleanSlug(post) {
   <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
     <div class="space-y-6">
       {posts.map((post) => {
-        const publishDate = formatDate(post.id);
+        const publishDate = formatDate(post.data.pubDate);
         const readTime = calculateReadTimeFromMarkdown(post.body);
         const cleanSlug = getCleanSlug(post);
 
@@ -104,9 +123,9 @@ function getCleanSlug(post) {
               <div class="flex flex-wrap gap-2">
                 {post.data.tags.map(postTag => (
                   <a
-                    href={`/tags/${postTag}`}
+                    href={`/tags/${encodeURIComponent(postTag)}`}
                     class={`inline-block text-sm px-2 py-1 rounded-md transition-colors ${
-                      postTag === tag
+                      postTag === currentTag
                         ? 'bg-blue-100 text-blue-800 font-medium'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}

@@ -6,31 +6,29 @@ import { calculateReadTimeFromMarkdown } from '../utils/readTime';
 // Get all blog posts
 const blogPosts = await getCollection('blog');
 
-// Sort by date (newest first) - we'll need to extract date from filename
+// Sort by date (newest first) using pubDate from frontmatter
 const sortedPosts = blogPosts.sort((a, b) => {
-  // Extract date from filename (YYYY-MM-DD format)
-  const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-  const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-  return dateB.localeCompare(dateA);
+  const dateA = new Date(a.data.pubDate);
+  const dateB = new Date(b.data.pubDate);
+  return dateB.getTime() - dateA.getTime();
 });
 
 // Show only first 5 posts on the home page
 const recentPosts = sortedPosts.slice(0, 5);
 const totalPosts = sortedPosts.length;
 
-// Helper function to format dates and calculate read times
-function formatDate(id) {
-  const dateMatch = id.match(/^(\d{4}-\d{2}-\d{2})/);
-  return dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+// Helper function to format dates
+function formatDate(pubDate) {
+  return new Date(pubDate).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }) : '';
+  });
 }
 
 // Helper function to generate clean URL slug
 function getCleanSlug(post) {
-  return post.data.slug || post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  return post.data.permalink;
 }
 ---
 
@@ -63,7 +61,7 @@ function getCleanSlug(post) {
   <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
     <div class="space-y-6">
       {recentPosts.map((post) => {
-        const publishDate = formatDate(post.id);
+        const publishDate = formatDate(post.data.pubDate);
         const readTime = calculateReadTimeFromMarkdown(post.body);
         const cleanSlug = getCleanSlug(post);
 
@@ -93,7 +91,7 @@ function getCleanSlug(post) {
               <div class="flex flex-wrap gap-2">
                 {post.data.tags.map(tag => (
                   <a
-                    href={`/tags/${tag}`}
+                    href={`/tags/${encodeURIComponent(tag)}`}
                     class="inline-block bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-md hover:bg-gray-200 transition-colors"
                   >
                     {tag}

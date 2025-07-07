@@ -16,3 +16,5 @@ I finished my Bachelor's in Software Engineering at [Ontario Tech University](ht
 I am currently working at [Shopify](https://www.shopify.ca/about), where I've been for the last 6 years. I primarily work in Ruby (Rails) on backend and APIs.
 
 You can find me on [Twitter](https://twitter.com/KevinJalbert), [GitHub](https://github.com/kevinjalbert).
+
+If you're curious about my setup and the tools I use daily, check out my [uses page](/uses). To see what I'm currently focused on, visit my [now page](/now).

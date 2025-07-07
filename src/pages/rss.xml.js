@@ -4,11 +4,13 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const blog = await getCollection('blog');
 
-  // Sort by date (newest first)
+  // Schema validation ensures all required fields are present, no manual checking needed
+
+  // Sort by date (newest first) using pubDate from frontmatter
   const sortedPosts = blog.sort((a, b) => {
-    const dateA = a.data.pubDate || new Date(a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '1970-01-01');
-    const dateB = b.data.pubDate || new Date(b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '1970-01-01');
-    return new Date(dateB) - new Date(dateA);
+    const dateA = new Date(a.data.pubDate);
+    const dateB = new Date(b.data.pubDate);
+    return dateB.getTime() - dateA.getTime();
   });
 
   return rss({
@@ -17,9 +19,9 @@ export async function GET(context) {
     site: context.site || 'https://kevinjalbert.com',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
-      pubDate: new Date(post.data.pubDate || post.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '1970-01-01'),
+      pubDate: new Date(post.data.pubDate),
       description: post.data.description,
-      link: `/blog/${post.slug}/`,
+      link: `/${post.data.permalink}/`,
       categories: post.data.tags || [],
     })),
     customData: `<language>en-us</language>`,

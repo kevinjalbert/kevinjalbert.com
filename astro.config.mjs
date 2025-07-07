@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
-import remarkWikiLink from 'remark-wiki-link';
-import { remarkImageWikilinks } from './plugins/remark-image-wikilinks.js';
+import remarkWikilinks from './integrations/remark-wikilinks.js';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
+import astroBrokenLinksChecker from 'astro-broken-links-checker';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,25 +11,14 @@ export default defineConfig({
 
   // Configure markdown processing
   markdown: {
+    remarkPlugins: [
+      remarkWikilinks, // Our comprehensive plugin for all wikilinks (images and pages)
+    ],
     syntaxHighlight: 'shiki',
     shikiConfig: {
       theme: 'one-light',
       wrap: true
     },
-    remarkPlugins: [
-      remarkImageWikilinks,
-      [remarkWikiLink, {
-        pageResolver: (name) => {
-          // Handle page links only
-          return [name.replace(/ /g, '-').toLowerCase()];
-        },
-        hrefTemplate: (permalink) => {
-          // Handle page links
-          return `/blog/${permalink}`;
-        },
-        aliasDivider: '|'
-      }]
-    ],
   },
 
   // Configure site settings
@@ -44,6 +33,14 @@ export default defineConfig({
   // Configure integrations
   integrations: [
     sitemap(),
-    tailwind()
+    tailwind(),
+    astroBrokenLinksChecker({
+      logFilePath: 'broken-links.log', // Log broken links to a file
+      checkExternalLinks: false, // Set to true if you want to check external links (slower)
+      // Additional options available:
+      // checkExternalLinks: true, // Enable to check external URLs (much slower)
+      // timeoutMs: 3000, // Timeout for external link checks
+      // retries: 3 // Number of retries for failed external links
+    })
   ]
 });

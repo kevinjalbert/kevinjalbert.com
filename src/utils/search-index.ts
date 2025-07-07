@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 import { marked } from 'marked';
 
 export interface SearchResult {
-  slug: string;
+  permalink: string;
   title: string;
   description: string;
   content: string;
@@ -14,35 +14,34 @@ export interface SearchResult {
 export async function generateSearchIndex(): Promise<SearchResult[]> {
   const blogPosts = await getCollection('blog');
 
-  // Sort by date (newest first)
+  // Sort by date (newest first) using pubDate from frontmatter
   const sortedPosts = blogPosts.sort((a, b) => {
-    const dateA = a.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-    const dateB = b.id.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || '';
-    return dateB.localeCompare(dateA);
+    const dateA = new Date(a.data.pubDate);
+    const dateB = new Date(b.data.pubDate);
+    return dateB.getTime() - dateA.getTime();
   });
 
   const searchIndex: SearchResult[] = [];
 
   for (const post of sortedPosts) {
-    // Extract date from filename
-    const dateMatch = post.id.match(/^(\d{4}-\d{2}-\d{2})/);
-    const date = dateMatch ? new Date(dateMatch[1]).toLocaleDateString('en-US', {
+    // Use pubDate from frontmatter
+    const date = new Date(post.data.pubDate).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    }) : '';
+    });
 
     // Get content text (we'll extract from the raw body for search purposes)
     const contentText = post.body.replace(/\s+/g, ' ').trim();
 
     searchIndex.push({
-      slug: post.slug,
+      permalink: post.data.permalink,
       title: post.data.title,
       description: post.data.description || '',
       content: contentText,
       date,
       tags: post.data.tags || [],
-      url: `/blog/${post.slug}`
+      url: `/${post.data.permalink}`
     });
   }
 
