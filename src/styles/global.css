@@ -118,3 +118,31 @@ body {
 .prose pre .copy-button.copied {
   background: #10b981;
 }
+
+/* YouTube embed styling */
+.prose .youtube-embed {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Fallback for browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 16 / 9) {
+  .prose .youtube-embed {
+    height: 315px;
+  }
+  
+  @media (max-width: 768px) {
+    .prose .youtube-embed {
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .prose .youtube-embed {
+      height: 200px;
+    }
+  }
+}
