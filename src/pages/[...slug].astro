@@ -56,9 +56,9 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
 ---
 
 <Layout title={entry.data.title} description={entry.data.description} canonical={canonicalURL}>
-  <!-- Post Title - Outside the white content box -->
+  <!-- Post Title - Outside the article but still indexed by pagefind -->
   <div class="text-center mb-8">
-    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">{entry.data.title}</h1>
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900" data-pagefind-meta="title">{entry.data.title}</h1>
   </div>
 
   <!-- Hero Image - Outside article container for faster loading -->
@@ -89,7 +89,6 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
   <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" data-pagefind-body>
     <!-- Hidden metadata for Pagefind -->
     <div style="display: none;">
-      <span data-pagefind-meta="title">{entry.data.title}</span>
       <span data-pagefind-meta="date">{publishDate}</span>
       {entry.data.description && (
         <span data-pagefind-meta="description">{entry.data.description}</span>

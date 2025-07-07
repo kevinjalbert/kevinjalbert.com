@@ -377,6 +377,28 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
         };
       }
 
+      // Helper function to highlight text based on search terms
+      if (!window.highlightText) {
+        window.highlightText = function(text, searchTerms) {
+          if (!text || !searchTerms || searchTerms.length === 0) return text;
+
+          let highlighted = text;
+
+          // Sort terms by length (longest first) to avoid partial replacements
+          const sortedTerms = [...searchTerms].sort((a, b) => b.length - a.length);
+
+          sortedTerms.forEach(term => {
+            if (term.length < 2) return; // Skip very short terms
+
+            // Create case-insensitive regex with word boundaries for better matching
+            const regex = new RegExp(`(\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b)`, 'gi');
+            highlighted = highlighted.replace(regex, '<mark>$1</mark>');
+          });
+
+          return highlighted;
+        };
+      }
+
       // Search functionality (only needs to be defined once)
       if (!window.performSearch) {
         window.performSearch = async function(query) {
@@ -398,7 +420,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
 
           try {
             const search = await window._pagefind.search(query);
-            const results = search.results.slice(0, 8);
+            let results = search.results;
 
             // Track search performed
             if (window.rybbit) {
@@ -416,18 +438,68 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
               return;
             }
 
-            const resultsData = await Promise.all(results.map(result => result.data()));
+            // Get detailed data for all results to enable better ranking
+            const resultsWithData = await Promise.all(
+              results.map(async (result) => {
+                const data = await result.data();
+                return { result, data };
+              })
+            );
+
+            // Custom ranking: prioritize title matches
+            const queryTerms = query.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+
+            resultsWithData.forEach(({ result, data }) => {
+              const title = (data.meta?.title || '').toLowerCase();
+              let titleMatchScore = 0;
+
+              // Check for exact title matches
+              if (title.includes(query.toLowerCase())) {
+                titleMatchScore += 10; // High boost for exact phrase in title
+              }
+
+              // Check for individual word matches in title
+              queryTerms.forEach(term => {
+                if (title.includes(term)) {
+                  titleMatchScore += 5; // Boost for each word match in title
+                }
+              });
+
+              // Add title match score to original score
+              result.titleMatchScore = titleMatchScore;
+              result.adjustedScore = result.score + titleMatchScore;
+            });
+
+            // Sort by adjusted score (higher is better)
+            resultsWithData.sort((a, b) => b.result.adjustedScore - a.result.adjustedScore);
+
+            // Take top 8 results
+            const topResults = resultsWithData.slice(0, 8);
 
             const fragment = document.createDocumentFragment();
-            resultsData.forEach((data, index) => {
+            topResults.forEach(({ result, data }, index) => {
               const div = document.createElement('div');
               div.className = 'search-result p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors border-l-2 border-l-transparent';
 
-              // Use date from pagefind meta data instead of URL parsing
+              // Use date from pagefind meta data
               const date = data.meta?.date || '';
 
+              // Get highlighted title by searching within the excerpt and content
+              const plainTitle = data.meta?.title || 'Untitled';
+              let displayTitle = plainTitle;
+
+              // Create a highlighted version of the title based on search query
+              const highlightedTitle = highlightText(plainTitle, queryTerms);
+              if (highlightedTitle !== plainTitle) {
+                displayTitle = highlightedTitle;
+              }
+
+              // Add visual indicator for title matches
+              const hasTitleMatch = result.titleMatchScore > 0;
+              const titleClass = hasTitleMatch ? 'font-semibold text-blue-800' : 'font-medium text-gray-900';
+
               div.innerHTML = `
-                <h3 class="font-medium text-gray-900 text-sm mb-1">${data.meta?.title || 'Untitled'}</h3>
+                <h3 class="${titleClass} text-sm mb-1">${displayTitle}</h3>
                 ${date ? `<span class="text-xs text-gray-500">${date}</span>` : ''}
                 <p class="text-xs text-gray-500 line-clamp-2">${data.excerpt}</p>
               `;
@@ -439,7 +511,8 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
                     result_position: index + 1,
                     result_url: data.url,
                     result_title: data.meta?.title || 'Untitled',
-                    query_length: query.length
+                    query_length: query.length,
+                    title_match: hasTitleMatch
                   });
                 }
                 window.location.href = data.url;

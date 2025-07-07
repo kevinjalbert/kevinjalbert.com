@@ -133,13 +133,13 @@ body {
   .prose .youtube-embed {
     height: 315px;
   }
-  
+
   @media (max-width: 768px) {
     .prose .youtube-embed {
       height: 250px;
     }
   }
-  
+
   @media (max-width: 480px) {
     .prose .youtube-embed {
       height: 200px;
