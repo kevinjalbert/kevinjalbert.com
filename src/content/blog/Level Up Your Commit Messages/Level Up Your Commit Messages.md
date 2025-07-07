@@ -8,7 +8,7 @@ description: >-
 tags:
   - process
   - communication
-  - version control
+  - version-control
 pubDate: 2019-01-30T00:00:00.000Z
 heroImage: assets/git-commit.png
 heroImageAlt: '''[XKCD Comic on Git Commit](https://xkcd.com/1296)'''

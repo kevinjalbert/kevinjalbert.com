@@ -2,8 +2,8 @@
 title: Sharing Plex with Common Media Sense age-restrictions
 description: Read how I've organized and shared my Plex media library for my kids. I've restricted the library to age-appropriate content using Common Sense Media and labels. The process is automated with the flexibility for manual overrides.
 tags:
-  - Plex
-  - Kids
+  - plex
+  - kids
 pubDate: 2023-03-27T00:00:00.000Z
 heroImage: assets/dvds.jpg
 heroImageAlt: "'[Walmart, Merritt Island FL](https://flickr.com/photos/rusty_clark/8344342208 \"Walmart, Merritt Island FL\") by [Rusty Clark ~ 100K Photos](https://flickr.com/people/rusty_clark) is licensed under [CC BY](https://creativecommons.org/licenses/by/2.0/)'"

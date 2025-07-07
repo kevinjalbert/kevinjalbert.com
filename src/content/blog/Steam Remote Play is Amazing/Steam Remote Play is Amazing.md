@@ -8,7 +8,7 @@ description: >-
 tags:
   - entertainment
   - steam
-  - video games
+  - video-games
 pubDate: 2021-12-30T00:00:00.000Z
 heroImage: assets/steam-link.jpg
 heroImageAlt: >-

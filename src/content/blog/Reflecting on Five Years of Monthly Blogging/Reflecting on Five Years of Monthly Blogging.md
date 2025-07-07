@@ -20,7 +20,7 @@ permalink: reflecting-on-five-years-of-monthly-blogging
 Just over five years ago, I decided to dive into the technical blogging sphere. Since then, I have consistently produced a blog post every month. There are a couple of reasons why I blog and why I wanted to keep the monthly cadence:
 
 - Sharing Knowledge
-- Improving my Writing
+- Improving my writing
 - Online Presence
 - Recognition
 
@@ -67,7 +67,7 @@ I've occasionally promoted my posts on social media. Similar to the above point,
 
 ## Reaching Many
 
-The following image is a snapshot of the five years in Google Analytics. I take pride that so many people have seen my content. The growth is a nice nod as well in keeping the monthly cadence up.
+The following image is a snapshot of the five years in google Analytics. I take pride that so many people have seen my content. The growth is a nice nod as well in keeping the monthly cadence up.
 
 ![Blog Stats](assets/blog-stats.png)
 

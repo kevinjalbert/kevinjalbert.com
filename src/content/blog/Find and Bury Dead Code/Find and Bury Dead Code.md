@@ -7,7 +7,7 @@ description: >-
   code in a living project?
 tags:
   - software
-  - software quality
+  - software-quality
   - ruby
 pubDate: 2017-02-26T00:00:00.000Z
 permalink: find-and-bury-dead-code

@@ -7,13 +7,44 @@ export async function getStaticPaths() {
   // Get all blog posts
   const blogPosts = await getCollection('blog');
 
-  // Collect all unique tags
+  // Collect all unique tags and validate they are URL-safe
   const allTags = new Set();
+  const problematicTags = [];
+
   blogPosts.forEach(post => {
     if (post.data.tags) {
-      post.data.tags.forEach(tag => allTags.add(tag));
+      post.data.tags.forEach(tag => {
+        allTags.add(tag);
+
+        // Validate that tags are URL-safe and lowercase
+        if (tag.includes(' ') ||
+            tag !== encodeURIComponent(tag) ||
+            /[^a-z0-9\-_]/.test(tag) ||
+            tag !== tag.toLowerCase()) {
+          problematicTags.push({
+            tag,
+            file: post.id,
+            title: post.data.title
+          });
+        }
+      });
     }
   });
+
+  // Throw an error if any problematic tags are found
+  if (problematicTags.length > 0) {
+    const errorMessage = [
+      'Found tags that are not lowercase or contain invalid characters:',
+      ...problematicTags.map(({ tag, file, title }) =>
+        `  - "${tag}" in ${file} (${title})`
+      ),
+      '',
+      'Tags must be lowercase and contain only letters, numbers, hyphens, and underscores.',
+      'Please convert to lowercase and replace spaces with hyphens.'
+    ].join('\n');
+
+    throw new Error(errorMessage);
+  }
 
   // Generate paths for each tag
   const paths = [];
@@ -31,7 +62,8 @@ export async function getStaticPaths() {
       return dateB.getTime() - dateA.getTime();
     });
 
-    // Use the tag as-is for the param (Astro will handle URL encoding)
+    // Since all tags are now URL-safe (no spaces or special characters),
+    // we can use them directly as parameters
     paths.push({
       params: { tag: tag },
       props: {
@@ -46,12 +78,8 @@ export async function getStaticPaths() {
 
 const { tag, posts } = Astro.props;
 
-// Handle both encoded and unencoded tag parameters
-// In development, Astro.params.tag might be encoded, in build it uses our props
-const currentTag = Astro.params.tag ? decodeURIComponent(Astro.params.tag) : tag;
-
 // Generate canonical URL for this tag page
-const canonicalURL = `https://kevinjalbert.com/tags/${encodeURIComponent(currentTag)}/`;
+const canonicalURL = `https://kevinjalbert.com/tags/${tag}/`;
 
 // Helper function to format dates
 function formatDate(pubDate) {
@@ -68,12 +96,12 @@ function getCleanSlug(post) {
 }
 ---
 
-<Layout title={`Posts tagged "${currentTag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${currentTag}"`} canonical={canonicalURL}>
+<Layout title={`Posts tagged "${tag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${tag}"`} canonical={canonicalURL}>
   <!-- Header -->
   <div class="mb-6">
     <div class="text-center mb-6">
       <h1 class="text-4xl font-bold text-gray-900 mb-2">
-        Posts tagged with <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-3xl">"{currentTag}"</span>
+        Posts tagged with <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-3xl">"{tag}"</span>
       </h1>
       <p class="text-lg text-gray-600">
         {posts.length} {posts.length === 1 ? 'post' : 'posts'} found
@@ -115,9 +143,9 @@ function getCleanSlug(post) {
               <div class="flex flex-wrap gap-2">
                 {post.data.tags.map(postTag => (
                   <a
-                    href={`/tags/${encodeURIComponent(postTag)}`}
+                    href={`/tags/${postTag}`}
                     class={`inline-block text-sm px-2 py-1 rounded-md transition-colors ${
-                      postTag === currentTag
+                      postTag === tag
                         ? 'bg-blue-100 text-blue-800 font-medium'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}

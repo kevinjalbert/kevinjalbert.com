@@ -7,7 +7,7 @@ description: >-
 tags:
   - ruby
   - pronto
-  - code review
+  - code-review
 pubDate: 2017-05-30T00:00:00.000Z
 heroImage: assets/robot.jpg
 heroImageAlt: >-

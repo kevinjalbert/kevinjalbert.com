@@ -7,8 +7,8 @@ description: >-
   work. Learn about my process for decompressing at home.
 tags:
   - process
-  - mental health
-  - remote working
+  - mental-health
+  - remote-working
 pubDate: 2019-02-28T00:00:00.000Z
 heroImage: assets/underwater.jpg
 heroImageAlt: >-

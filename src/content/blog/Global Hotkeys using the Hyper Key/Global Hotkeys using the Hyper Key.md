@@ -6,7 +6,7 @@ description: >-
   mouse cursor.
 tags:
   - productivity
-  - MacOS
+  - macos
 pubDate: 2021-11-28T00:00:00.000Z
 heroImage: assets/alfred-shortcuts.png
 heroImageAlt: >-

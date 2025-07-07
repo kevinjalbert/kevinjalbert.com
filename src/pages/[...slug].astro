@@ -111,7 +111,7 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
           <div class="flex flex-wrap gap-2 justify-center sm:justify-end" data-pagefind-ignore>
           {entry.data.tags.map(tag => (
             <a
-              href={`/tags/${encodeURIComponent(tag)}`}
+              href={`/tags/${tag}`}
               class="inline-block bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full hover:bg-blue-100 transition-colors"
             >
               {tag}

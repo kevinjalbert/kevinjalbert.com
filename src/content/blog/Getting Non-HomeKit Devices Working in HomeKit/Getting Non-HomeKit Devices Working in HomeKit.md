@@ -5,9 +5,9 @@ description: >-
   Homebridge. This makes it easy to use Siri (via an Apple Watch) to control my
   smart devices.
 tags:
-  - iOS
-  - HomeKit
-  - Homebridge
+  - ios
+  - homekit
+  - homebridge
 pubDate: 2022-11-30T00:00:00.000Z
 heroImage: assets/homebridge.png
 heroImageAlt: '''My Homebridge UI with the current installed plugins for my smart devices'''

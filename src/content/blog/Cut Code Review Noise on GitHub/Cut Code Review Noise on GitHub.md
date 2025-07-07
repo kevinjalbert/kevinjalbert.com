@@ -6,7 +6,7 @@ description: >-
   GitHub's reactions and request review features.
 tags:
   - github
-  - code review
+  - code-review
   - collaboration
 pubDate: 2017-03-28T00:00:00.000Z
 heroImage: assets/scissors.jpg

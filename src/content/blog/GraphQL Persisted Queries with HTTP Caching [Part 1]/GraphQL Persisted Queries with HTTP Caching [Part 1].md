@@ -8,7 +8,7 @@ tags:
   - graphql
   - rails
   - express
-  - http caching
+  - http-caching
 pubDate: 2018-07-15T00:00:00.000Z
 heroImage: assets/post-query.png
 heroImageAlt: '''Generated with [Carbon.now.sh](https://carbon.now.sh/)'''

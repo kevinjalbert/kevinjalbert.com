@@ -7,7 +7,7 @@ description: >-
   free.
 tags:
   - self-improvement
-  - quantified self
+  - quantified-self
 pubDate: 2022-09-30T00:00:00.000Z
 heroImage: assets/measuring-tools.jpg
 heroImageAlt: >-

@@ -8,7 +8,7 @@ description: >-
   differences cause negative effects, and how we can mitigate them.
 tags:
   - software
-  - best practices
+  - best-practices
 pubDate: 2017-01-31T00:00:00.000Z
 heroImage: assets/xkcd-code-quality.png
 heroImageAlt: '''[XKCD Comic on Code Quality](https://xkcd.com/1513/)'''

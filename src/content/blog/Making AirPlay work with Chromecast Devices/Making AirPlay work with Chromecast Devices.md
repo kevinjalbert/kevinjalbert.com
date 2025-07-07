@@ -4,9 +4,9 @@ description: >-
   Read about how I got my Chromecast devices (i.e., Google Nest Minis) to work
   with AirPlay and play audio streams.
 tags:
-  - iOS
-  - Apple
-  - Google
+  - ios
+  - apple
+  - google
 pubDate: 2023-02-27T00:00:00.000Z
 heroImage: assets/airplay-list.png
 heroImageAlt: >-

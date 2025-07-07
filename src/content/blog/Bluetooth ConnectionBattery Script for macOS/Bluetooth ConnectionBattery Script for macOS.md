@@ -4,7 +4,7 @@ description: Using AppleScript to simplify connecting bluetooth earphones to mac
 tags:
   - hardware
   - bluetooth
-  - macOS
+  - macos
 pubDate: 2017-04-08T00:00:00.000Z
 heroImage: assets/beatsx.jpg
 heroImageAlt: '''My BeatsX Earphones'''

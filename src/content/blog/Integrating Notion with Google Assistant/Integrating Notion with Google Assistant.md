@@ -7,7 +7,7 @@ description: >-
   commands.
 tags:
   - notion
-  - google assistant
+  - google-assistant
   - productivity
   - tools
 pubDate: 2019-07-15T00:00:00.000Z

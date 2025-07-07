@@ -6,9 +6,9 @@ description: >-
   writing cadence, explore innovative content creation methods, and consider a
   much-needed redesign.
 tags:
-  - AI
-  - Reflection
-  - Self-improvement
+  - ai
+  - reflection
+  - self-improvement
 pubDate: 2023-06-30T00:00:00.000Z
 heroImage: assets/laptop-water.jpg
 heroImageAlt: >-

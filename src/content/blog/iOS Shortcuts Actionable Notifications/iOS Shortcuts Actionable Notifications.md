@@ -6,7 +6,7 @@ description: >-
   Notification' in iOS Shortcuts is non-actionable and therefore lacking. Read
   about how to take advantage of actionable notifications in iOS Shortcuts.
 tags:
-  - iOS
+  - ios
   - tools
 pubDate: 2022-10-31T00:00:00.000Z
 heroImage: assets/notifications.jpg

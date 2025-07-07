@@ -6,9 +6,9 @@ description: >-
   Excalidraw. In this post, we'll explore how the embedded scene feature works,
   its benefits, and some potential gotchas to watch out for.
 tags:
-  - Tool
-  - Diagramming
-  - Excalidraw
+  - tool
+  - diagramming
+  - excalidraw
 pubDate: 2023-04-30T00:00:00.000Z
 heroImage: assets/excalidraw-export.png
 heroImageAlt: >-

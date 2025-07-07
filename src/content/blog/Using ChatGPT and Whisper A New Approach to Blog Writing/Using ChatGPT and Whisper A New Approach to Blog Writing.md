@@ -7,10 +7,10 @@ description: >-
   the topic. By utilizing ChatGPT and making minor adjustments, read how I
   successfully generate a blog post.
 tags:
-  - ChatGPT
-  - Whisper
-  - AI
-  - Writing
+  - chatgpt
+  - whisper
+  - ai
+  - writing
 pubDate: 2023-05-31T00:00:00.000Z
 heroImage: assets/robot-typing.jpg
 heroImageAlt: >-
