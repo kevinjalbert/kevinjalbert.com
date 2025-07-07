@@ -61,18 +61,54 @@ export default {
         },
         sm: {
           css: {
+            fontSize: '0.875rem',
+            lineHeight: '1.5',
+            padding: '0',
             img: {
-              maxWidth: 'calc(100% - 1rem)',
+              maxWidth: 'calc(100% - 0.5rem)',
+              marginTop: '1rem',
+              marginBottom: '1rem',
             },
             'div[style*="display: flex"]': {
-              maxWidth: 'calc(100% - 1rem)',
+              maxWidth: 'calc(100% - 0.5rem)',
               flexDirection: 'column',
-              gap: '1rem',
+              gap: '0.75rem',
+              marginTop: '1rem',
+              marginBottom: '1rem',
             },
             'div[style*="display: flex"] img': {
               width: '100%',
-              maxWidth: 'calc(100% - 1rem)',
+              maxWidth: 'calc(100% - 0.5rem)',
               flex: 'none',
+              marginTop: '0',
+              marginBottom: '0',
+            },
+            'h1, h2, h3, h4, h5, h6': {
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
+              lineHeight: '1.3',
+            },
+            'p': {
+              marginTop: '0.75rem',
+              marginBottom: '0.75rem',
+            },
+            'ul, ol': {
+              marginTop: '0.75rem',
+              marginBottom: '0.75rem',
+              paddingLeft: '1.25rem',
+            },
+            'li': {
+              marginTop: '0.25rem',
+              marginBottom: '0.25rem',
+            },
+            'pre': {
+              margin: '1rem -0.25rem',
+              padding: '1rem 0.75rem',
+              borderRadius: '0.375rem',
+            },
+            'blockquote': {
+              margin: '1rem 0',
+              paddingLeft: '1rem',
             },
           },
         },

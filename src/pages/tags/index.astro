@@ -31,7 +31,7 @@ const sortedTags = Array.from(tagCounts.entries())
   </div>
 
   <!-- Tags Cloud -->
-  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-8">
     <div class="flex flex-wrap gap-3 justify-center items-baseline">
       {sortedTags.map(({ tag, count }) => {
         // Scale tag size based on post count (min 1, max 3 scale for better consistency)

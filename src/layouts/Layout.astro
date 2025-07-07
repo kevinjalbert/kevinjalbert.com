@@ -41,7 +41,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
     <div class="min-h-screen flex flex-col">
       <!-- Header -->
       <header class="bg-white shadow-sm border-b border-gray-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
           <div class="flex justify-between items-center h-16 min-h-[64px]">
             <div class="flex items-center">
               <a href="/" class="text-xl font-bold text-gray-600 hover:text-gray-900 transition-colors underline decoration-gray-300 hover:decoration-gray-600 underline-offset-4">
@@ -107,14 +107,14 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
 
       <!-- Main content -->
       <main class="flex-1">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
           <slot />
         </div>
       </main>
 
       <!-- Footer -->
       <footer class="bg-white border-t border-gray-200 mt-auto">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 py-6">
           <div class="flex justify-center items-center">
             <p class="text-center text-gray-600 text-sm">
               &copy; 2025 Kevin Jalbert. All rights reserved.
