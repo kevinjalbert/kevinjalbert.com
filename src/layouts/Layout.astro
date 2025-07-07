@@ -6,9 +6,13 @@ import SearchModal from '../components/SearchModal.astro';
 interface Props {
   title: string;
   description?: string;
+  canonical?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonical } = Astro.props;
+
+// Generate canonical URL - use provided canonical or construct from current URL
+const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -19,6 +23,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="Kevin Jalbert's Blog" href="/rss.xml" />
+    <link rel="canonical" href={canonicalURL} />
     <title>{title}</title>
 
     <!-- Rybbit Tracking Snippet -->

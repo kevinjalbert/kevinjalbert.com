@@ -31,25 +31,14 @@ export async function getStaticPaths() {
       return dateB.getTime() - dateA.getTime();
     });
 
-    // For static build, use encoded version
+    // Use the tag as-is for the param (Astro will handle URL encoding)
     paths.push({
-      params: { tag: encodeURIComponent(tag) },
+      params: { tag: tag },
       props: {
         tag,
         posts: sortedPosts
       }
     });
-
-    // For development, also add unencoded version if different
-    if (encodeURIComponent(tag) !== tag) {
-      paths.push({
-        params: { tag: tag },
-        props: {
-          tag,
-          posts: sortedPosts
-        }
-      });
-    }
   });
 
   return paths;
@@ -60,6 +49,9 @@ const { tag, posts } = Astro.props;
 // Handle both encoded and unencoded tag parameters
 // In development, Astro.params.tag might be encoded, in build it uses our props
 const currentTag = Astro.params.tag ? decodeURIComponent(Astro.params.tag) : tag;
+
+// Generate canonical URL for this tag page
+const canonicalURL = `https://kevinjalbert.com/tags/${encodeURIComponent(currentTag)}/`;
 
 // Helper function to format dates
 function formatDate(pubDate) {
@@ -76,7 +68,7 @@ function getCleanSlug(post) {
 }
 ---
 
-<Layout title={`Posts tagged "${currentTag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${currentTag}"`}>
+<Layout title={`Posts tagged "${currentTag}" | Kevin Jalbert's Blog`} description={`All blog posts tagged with "${currentTag}"`} canonical={canonicalURL}>
   <!-- Header -->
   <div class="mb-6">
     <div class="text-center mb-6">

@@ -20,6 +20,11 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 
+// Generate canonical URL for this page
+const canonicalURL = page.currentPage === 1
+  ? 'https://kevinjalbert.com/' // First page should canonical to homepage
+  : `https://kevinjalbert.com/posts/${page.currentPage}/`;
+
 // Helper function to format dates
 function formatDate(pubDate) {
   return new Date(pubDate).toLocaleDateString('en-US', {
@@ -35,7 +40,7 @@ function getCleanSlug(post) {
 }
 ---
 
-<Layout title={`Posts - Page ${page.currentPage} | Kevin Jalbert's Blog`} description="Browse all blog posts about software development and productivity">
+<Layout title={`Posts - Page ${page.currentPage} | Kevin Jalbert's Blog`} description="Browse all blog posts about software development and productivity" canonical={canonicalURL}>
   <!-- Header with Inline Navigation -->
   <div class="mb-6">
     <div class="text-center mb-3">
