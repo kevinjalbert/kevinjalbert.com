@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import { marked } from 'marked';
 import { calculateReadTimeFromMarkdown } from '../utils/readTime';
@@ -62,6 +61,31 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
     <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">{entry.data.title}</h1>
   </div>
 
+  <!-- Hero Image - Outside article container for faster loading -->
+  {entry.data.heroImage && (
+    <div class="mb-2">
+      <div class="relative">
+        <img
+          src={entry.data.heroImage.src}
+          alt={processedHeroImageAlt || entry.data.title}
+          class="w-full h-64 sm:h-80 object-cover rounded-lg"
+          loading="eager"
+          fetchpriority="high"
+        />
+        {entry.data.pull_image_attribution && (
+          <div class="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+            <span set:html={processedPullImageAttribution} />
+          </div>
+        )}
+      </div>
+      {entry.data.heroImageAlt && (
+        <div class="py-2">
+          <p class="text-xs text-gray-500 text-center italic [&_a]:text-blue-600 [&_a:hover]:text-blue-800 [&_a]:transition-colors" set:html={processedHeroImageAlt} />
+        </div>
+      )}
+    </div>
+  )}
+
   <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" data-pagefind-body>
     <!-- Hidden metadata for Pagefind -->
     <div style="display: none;">
@@ -75,7 +99,7 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
     <!-- Article Header -->
     <div class="p-6 sm:p-8 border-b border-gray-100">
       <!-- Metadata and Tags in a more compact layout -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-0">
         {publishDate && (
           <div class="flex items-center justify-center sm:justify-start text-gray-500 text-sm space-x-4">
             <time>{publishDate}</time>
@@ -98,32 +122,9 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
       )}
     </div>
 
-    <!-- Article Hero Image -->
-    {entry.data.heroImage && (
-      <div>
-        <div class="relative">
-          <Image
-            src={entry.data.heroImage}
-            alt={processedHeroImageAlt || entry.data.title}
-            class="w-full h-64 sm:h-80 object-cover rounded-lg"
-          />
-          {entry.data.pull_image_attribution && (
-            <div class="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-              <span set:html={processedPullImageAttribution} />
-            </div>
-          )}
-        </div>
-        {entry.data.heroImageAlt && (
-          <div class="px-6 sm:px-8 py-2 border-b border-gray-100">
-            <p class="text-xs text-gray-500 text-center italic [&_a]:text-blue-600 [&_a:hover]:text-blue-800 [&_a]:transition-colors" set:html={processedHeroImageAlt} />
-          </div>
-        )}
-      </div>
-    )}
-
     <!-- Article Content -->
     <div class="p-6 sm:p-8">
-      <div class="prose max-w-none prose-headings:text-gray-900 prose-h1:mt-8 prose-h2:mt-6 prose-h3:mt-5 prose-h4:mt-4 prose-li:my-1 prose-ul:pl-4 prose-ul:mt-2 prose-ol:pl-4 prose-ol:mt-2 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-a:no-underline hover:prose-a:underline">
+      <div class="prose max-w-none prose-headings:text-gray-900 prose-h1:mt-8 prose-h2:mt-6 prose-h3:mt-5 prose-h4:mt-4 [&>*:first-child]:mt-0 prose-li:my-1 prose-ul:pl-4 prose-ul:mt-2 prose-ol:pl-4 prose-ol:mt-2 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-a:no-underline hover:prose-a:underline">
         <Content />
       </div>
     </div>
