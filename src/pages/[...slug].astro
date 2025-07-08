@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import DatedContentDisclaimer from '../components/DatedContentDisclaimer.astro';
 import HeroImage from '../components/HeroImage.astro';
 import PostHeader from '../components/PostHeader.astro';
 import PostNavigation from '../components/PostNavigation.astro';
@@ -84,6 +85,14 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
 
     <!-- Article Content -->
     <div class="p-3 sm:p-8">
+      <!-- Dated Content Disclaimer -->
+      <DatedContentDisclaimer
+        pubDate={entry.data.pubDate}
+        tags={entry.data.tags}
+        forceShowDatedDisclaimer={entry.data.forceShowDatedDisclaimer}
+        forceHideDatedDisclaimer={entry.data.forceHideDatedDisclaimer}
+      />
+
       <div class="prose max-w-none prose-headings:text-gray-900 prose-h1:mt-8 prose-h2:mt-6 prose-h3:mt-5 prose-h4:mt-4 [&>*:first-child]:mt-0 prose-li:my-1 prose-ul:pl-4 prose-ul:mt-2 prose-ol:pl-4 prose-ol:mt-2 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-a:no-underline hover:prose-a:underline">
         <Content />
       </div>

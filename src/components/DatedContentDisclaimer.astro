@@ -1,0 +1,107 @@
+---
+// Component for displaying a disclaimer when content might be dated
+import datedContentConfig from '../config/dated-content.json';
+
+export interface Props {
+  pubDate?: string | Date;
+  tags?: string[];
+  forceShowDatedDisclaimer?: boolean;
+  forceHideDatedDisclaimer?: boolean;
+}
+
+const { pubDate, tags = [], forceShowDatedDisclaimer, forceHideDatedDisclaimer } = Astro.props;
+---
+
+<div
+  id="dated-content-disclaimer"
+  class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg hidden"
+  data-pub-date={pubDate?.toString()}
+  data-tags={JSON.stringify(tags)}
+  data-force-show={forceShowDatedDisclaimer}
+  data-force-hide={forceHideDatedDisclaimer}
+  data-config={JSON.stringify(datedContentConfig)}
+>
+  <div class="flex items-start space-x-3">
+    <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.888-.833-2.598 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+    </svg>
+    <div>
+      <h3 class="text-amber-800 font-medium text-sm mb-1">Potentially Dated Content</h3>
+      <p class="text-amber-700 text-sm">
+        This article might contain information that is no longer current due to changes in technology, services, or best practices. Please verify the information before implementing any suggestions.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function shouldShowDisclaimer() {
+    const disclaimerEl = document.getElementById('dated-content-disclaimer');
+    if (!disclaimerEl) return false;
+
+    const pubDateStr = disclaimerEl.dataset.pubDate;
+    const tagsStr = disclaimerEl.dataset.tags;
+    const forceShow = disclaimerEl.dataset.forceShow === 'true';
+    const forceHide = disclaimerEl.dataset.forceHide === 'true';
+    const configStr = disclaimerEl.dataset.config;
+
+    // Parse configuration
+    const config = configStr ? JSON.parse(configStr) : { ageBuckets: [] };
+    const { ageBuckets } = config;
+
+    // Force show override
+    if (forceShow) return true;
+
+    // Force hide override
+    if (forceHide) return false;
+
+    // Auto-detection: use most restrictive approach
+    // If ANY tag matches a bucket and the post is old enough, show disclaimer
+    if (pubDateStr && pubDateStr !== 'undefined' && ageBuckets?.length) {
+      const postDate = new Date(pubDateStr);
+      const ageInMonths = (Date.now() - postDate.getTime()) / (1000 * 60 * 60 * 24 * 30.44);
+      const tags = tagsStr ? JSON.parse(tagsStr) : [];
+
+      // Find the shortest (most restrictive) age threshold among matching buckets
+      let shortestThreshold = Infinity;
+
+      for (const bucket of ageBuckets) {
+        const hasMatchingTags = tags.some(tag =>
+          bucket.tags.some(bucketTag =>
+            tag.toLowerCase().includes(bucketTag.toLowerCase())
+          )
+        );
+
+        if (hasMatchingTags && bucket.ageInMonths < shortestThreshold) {
+          shortestThreshold = bucket.ageInMonths;
+        }
+      }
+
+      // Show disclaimer if post is older than the shortest threshold found
+      if (shortestThreshold !== Infinity && ageInMonths >= shortestThreshold) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const disclaimerEl = document.getElementById('dated-content-disclaimer');
+    if (disclaimerEl && shouldShowDisclaimer()) {
+      disclaimerEl.classList.remove('hidden');
+    }
+  });
+
+  // Also run immediately in case DOMContentLoaded already fired
+  if (document.readyState === 'loading') {
+    // DOMContentLoaded has not fired yet
+  } else {
+    // DOMContentLoaded has already fired
+    const disclaimerEl = document.getElementById('dated-content-disclaimer');
+    if (disclaimerEl && shouldShowDisclaimer()) {
+      disclaimerEl.classList.remove('hidden');
+    }
+  }
+</script>

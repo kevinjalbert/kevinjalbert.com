@@ -12,7 +12,15 @@ const blog = defineCollection({
     permalink: z.string(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-  }),
+    forceShowDatedDisclaimer: z.boolean().optional(),
+    forceHideDatedDisclaimer: z.boolean().optional(),
+  }).refine(
+    (data) => !(data.forceShowDatedDisclaimer && data.forceHideDatedDisclaimer),
+    {
+      message: "Cannot have both forceShowDatedDisclaimer and forceHideDatedDisclaimer set to true",
+      path: ["forceShowDatedDisclaimer", "forceHideDatedDisclaimer"],
+    }
+  ),
 });
 
 const pages = defineCollection({

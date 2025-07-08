@@ -1,0 +1,40 @@
+{
+  "ageBuckets": [
+    {
+      "ageInMonths": 6,
+      "tags": [
+        "ai", "chatgpt", "whisper"
+      ]
+    },
+    {
+      "ageInMonths": 12,
+      "tags": [
+        "jest", "styled-jsx", "react"
+      ]
+    },
+    {
+      "ageInMonths": 18,
+      "tags": [
+        "ios", "graphql"
+      ]
+    },
+    {
+      "ageInMonths": 24,
+      "tags": [
+        "rails", "ruby", "rspec", "pry", "rake", "sidekiq", "tools", "productivity", "notion"
+      ]
+    },
+    {
+      "ageInMonths": 36,
+      "tags": [
+        "docker", "minio", "aurora", "postgresql", "aws", "nginx"
+      ]
+    },
+    {
+      "ageInMonths": 48,
+      "tags": [
+        "git", "github", "vim", "shell", "terminal", "macos", "iterm2", "testing"
+      ]
+    }
+  ]
+}
