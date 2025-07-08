@@ -24,13 +24,7 @@ const pages = defineCollection({
   }),
 });
 
-const images = defineCollection({
-  type: 'data',
-  schema: z.any(), // Images don't need schema validation
-});
-
 export const collections = {
   blog,
   pages,
-  images,
 };
