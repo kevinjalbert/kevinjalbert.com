@@ -1,0 +1,43 @@
+---
+// Component for displaying hero image with optional attribution
+import { marked } from 'marked';
+
+export interface Props {
+  heroImage?: {
+    src: string;
+  };
+  heroImageAlt?: string;
+  pullImageAttribution?: string;
+  title: string;
+}
+
+const { heroImage, heroImageAlt, pullImageAttribution, title } = Astro.props;
+
+// Process markdown in image attribution if it exists
+const processedHeroImageAlt = heroImageAlt ? marked.parseInline(heroImageAlt) : null;
+const processedPullImageAttribution = pullImageAttribution ? marked.parseInline(pullImageAttribution) : null;
+---
+
+{heroImage && (
+  <div class="mb-2">
+    <div class="relative">
+      <img
+        src={heroImage.src}
+        alt={heroImageAlt || title}
+        class="w-full h-64 sm:h-80 object-cover rounded-lg"
+        loading="eager"
+        fetchpriority="high"
+      />
+      {pullImageAttribution && (
+        <div class="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
+          <span set:html={pullImageAttribution} />
+        </div>
+      )}
+    </div>
+    {heroImageAlt && (
+      <div class="py-2">
+        <p class="text-xs text-gray-500 text-center italic [&_a]:text-blue-600 [&_a:hover]:text-blue-800 [&_a]:transition-colors" set:html={heroImageAlt} />
+      </div>
+    )}
+  </div>
+)}

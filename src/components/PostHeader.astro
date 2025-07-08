@@ -1,0 +1,45 @@
+---
+// Component for displaying post metadata (date, read time, tags)
+import { calculateReadTimeFromMarkdown } from '../utils/readTime';
+
+export interface Props {
+  pubDate: Date;
+  postBody: string;
+  tags?: string[];
+}
+
+const { pubDate, postBody, tags } = Astro.props;
+
+// Calculate read time from the post body
+const readTime = calculateReadTimeFromMarkdown(postBody);
+
+// Format publish date
+const publishDate = new Date(pubDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-0">
+  {publishDate && (
+    <div class="flex items-center justify-center sm:justify-start text-gray-500 text-sm space-x-4">
+      <time>{publishDate}</time>
+      <span>•</span>
+      <span>{readTime.text}</span>
+    </div>
+  )}
+
+  {tags && tags.length > 0 && (
+    <div class="flex flex-wrap gap-2 justify-center sm:justify-end" data-pagefind-ignore>
+      {tags.map(tag => (
+        <a
+          href={`/tags/${tag}`}
+          class="inline-block bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full hover:bg-blue-100 transition-colors"
+        >
+          {tag}
+        </a>
+      ))}
+    </div>
+  )}
+</div>

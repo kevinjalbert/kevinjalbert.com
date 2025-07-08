@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import { marked } from 'marked';
+import HeroImage from '../components/HeroImage.astro';
+import PostHeader from '../components/PostHeader.astro';
+import PostNavigation from '../components/PostNavigation.astro';
 import { calculateReadTimeFromMarkdown } from '../utils/readTime';
 
 export async function getStaticPaths() {
@@ -36,21 +38,13 @@ const { Content } = await entry.render();
 // Calculate read time
 const readTime = calculateReadTimeFromMarkdown(entry.body);
 
-// Use pubDate from frontmatter for display
+// Format date for Pagefind metadata
 const publishDate = new Date(entry.data.pubDate).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 });
 
-// Process markdown in image attribution if it exists
-const processedHeroImageAlt = entry.data.heroImageAlt ? marked.parseInline(entry.data.heroImageAlt) : null;
-const processedPullImageAttribution = entry.data.pull_image_attribution ? marked.parseInline(entry.data.pull_image_attribution) : null;
-
-// Helper function to get clean slug for any post
-function getCleanSlug(post) {
-  return post.data.permalink;
-}
 // Generate canonical URL for this post
 const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
 ---
@@ -62,29 +56,12 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
   </div>
 
   <!-- Hero Image - Outside article container for faster loading -->
-  {entry.data.heroImage && (
-    <div class="mb-2">
-      <div class="relative">
-        <img
-          src={entry.data.heroImage.src}
-          alt={processedHeroImageAlt || entry.data.title}
-          class="w-full h-64 sm:h-80 object-cover rounded-lg"
-          loading="eager"
-          fetchpriority="high"
-        />
-        {entry.data.pull_image_attribution && (
-          <div class="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-            <span set:html={processedPullImageAttribution} />
-          </div>
-        )}
-      </div>
-      {entry.data.heroImageAlt && (
-        <div class="py-2">
-          <p class="text-xs text-gray-500 text-center italic [&_a]:text-blue-600 [&_a:hover]:text-blue-800 [&_a]:transition-colors" set:html={processedHeroImageAlt} />
-        </div>
-      )}
-    </div>
-  )}
+  <HeroImage
+    heroImage={entry.data.heroImage}
+    heroImageAlt={entry.data.heroImageAlt}
+    pullImageAttribution={entry.data.pull_image_attribution}
+    title={entry.data.title}
+  />
 
   <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" data-pagefind-body>
     <!-- Hidden metadata for Pagefind -->
@@ -98,27 +75,11 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
     <!-- Article Header -->
     <div class="p-3 sm:p-8 border-b border-gray-100">
       <!-- Metadata and Tags in a more compact layout -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-0">
-        {publishDate && (
-          <div class="flex items-center justify-center sm:justify-start text-gray-500 text-sm space-x-4">
-            <time>{publishDate}</time>
-            <span>•</span>
-            <span>{readTime.text}</span>
-          </div>
-        )}
-
-        {entry.data.tags && entry.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2 justify-center sm:justify-end" data-pagefind-ignore>
-          {entry.data.tags.map(tag => (
-            <a
-              href={`/tags/${tag}`}
-              class="inline-block bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full hover:bg-blue-100 transition-colors"
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
-      )}
+      <PostHeader
+        pubDate={entry.data.pubDate}
+        postBody={entry.body}
+        tags={entry.data.tags}
+      />
     </div>
 
     <!-- Article Content -->
@@ -130,56 +91,8 @@ const canonicalURL = `https://kevinjalbert.com/${entry.data.permalink}/`;
   </article>
 
   <!-- Post Navigation -->
-  <div class="mt-8 space-y-6" data-pagefind-ignore>
-    <!-- Previous/Next Posts -->
-    {(prevPost || nextPost) && (
-      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Previous Post -->
-          <div class="text-left">
-            {prevPost && (
-              <div>
-                <p class="text-sm text-gray-500 mb-2">Previous Post</p>
-                <a
-                  href={`/${getCleanSlug(prevPost)}`}
-                  class="block text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  <div class="flex items-start space-x-3">
-                    <svg class="w-5 h-5 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                    <div>
-                      <p class="font-medium line-clamp-2">{prevPost.data.title}</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            )}
-          </div>
-
-          <!-- Next Post -->
-          <div class="text-right">
-            {nextPost && (
-              <div>
-                <p class="text-sm text-gray-500 mb-2">Next Post</p>
-                <a
-                  href={`/${getCleanSlug(nextPost)}`}
-                  class="block text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  <div class="flex items-start space-x-3 justify-end">
-                    <div class="text-right">
-                      <p class="font-medium line-clamp-2">{nextPost.data.title}</p>
-                    </div>
-                    <svg class="w-5 h-5 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    )}
-  </div>
+  <PostNavigation
+    prevPost={prevPost}
+    nextPost={nextPost}
+  />
 </Layout>

@@ -1,0 +1,77 @@
+---
+// Component for displaying previous/next post navigation
+export interface Props {
+  prevPost?: {
+    data: {
+      title: string;
+      permalink: string;
+    };
+  };
+  nextPost?: {
+    data: {
+      title: string;
+      permalink: string;
+    };
+  };
+}
+
+const { prevPost, nextPost } = Astro.props;
+
+// Helper function to get clean slug for any post
+function getCleanSlug(post: { data: { permalink: string } }) {
+  return post.data.permalink;
+}
+---
+
+{(prevPost || nextPost) && (
+  <div class="mt-8 space-y-6" data-pagefind-ignore>
+    <!-- Previous/Next Posts -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-3 sm:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Previous Post -->
+        <div class="text-left">
+          {prevPost && (
+            <div>
+              <p class="text-sm text-gray-500 mb-2">Previous Post</p>
+              <a
+                href={`/${getCleanSlug(prevPost)}`}
+                class="block text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                <div class="flex items-start space-x-3">
+                  <svg class="w-5 h-5 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <div>
+                    <p class="font-medium line-clamp-2">{prevPost.data.title}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          )}
+        </div>
+
+        <!-- Next Post -->
+        <div class="text-right">
+          {nextPost && (
+            <div>
+              <p class="text-sm text-gray-500 mb-2">Next Post</p>
+              <a
+                href={`/${getCleanSlug(nextPost)}`}
+                class="block text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                <div class="flex items-start space-x-3 justify-end">
+                  <div class="text-right">
+                    <p class="font-medium line-clamp-2">{nextPost.data.title}</p>
+                  </div>
+                  <svg class="w-5 h-5 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+)}
