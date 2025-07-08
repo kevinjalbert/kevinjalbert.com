@@ -6,6 +6,7 @@
 
 - **⚡ Ultra-Fast Performance**: Built with Astro 5 for optimal performance and static site generation
 - **🔍 Advanced Search**: Powered by Pagefind with keyboard shortcuts (`/` to search) and mobile-optimized interface
+- **⚠️ Smart Content Dating**: Automatic disclaimer system for potentially outdated technical content
 - **🏷️ Smart Tag System**: Browse and filter posts by topics and categories
 - **📱 Responsive Design**: Beautiful, modern UI with Tailwind CSS and mobile-first approach
 - **🔗 Wiki-Style Linking**: Seamless internal linking between posts with custom remark plugins
@@ -25,40 +26,17 @@ Modern Astro project with content collections and integrated tooling:
 kevinjalbert.com/
 ├── src/
 │   ├── components/       # Reusable Astro components
-│   │   └── SearchModal.astro  # Advanced search modal with Pagefind
-│   ├── layouts/          # Page layouts with ViewTransitions
-│   │   └── Layout.astro  # Main layout with search, navigation, mobile menu
+│   ├── layouts/          # Page layouts
 │   ├── pages/            # File-based routing
-│   │   ├── [...page].astro    # Dynamic pagination
-│   │   ├── [...slug].astro    # Dynamic blog post routing
-│   │   ├── index.astro        # Homepage
-│   │   ├── rss.xml.js        # RSS feed generation
-│   │   ├── api/              # API routes
-│   │   ├── blog/             # Blog-specific pages
-│   │   ├── posts/            # Post listing pages
-│   │   └── tags/             # Tag-based filtering
 │   ├── styles/           # Global CSS and Tailwind
-│   │   └── global.css    # Base styles and utilities
 │   ├── utils/            # Utility functions
-│   │   ├── readTime.ts   # Reading time calculation
-│   │   └── search-index.ts    # Search indexing utilities
+│   ├── config/           # Configuration files
 │   └── content/          # Content collections (synced from Obsidian)
-│       ├── blog/         # Blog posts (markdown files)
-│       ├── pages/        # Static pages (about, now, etc.)
-│       └── config.ts     # Content collection schemas
 ├── scripts/              # Content sync and utility scripts
-│   └── sync-content.sh   # Bidirectional Obsidian sync
-├── integrations/         # Custom Astro plugins and integrations
-│   └── remark-wikilinks.js   # Wiki-style linking for pages and images
+├── integrations/         # Custom Astro plugins
 ├── test/                 # Test files
-│   ├── README.md         # Test documentation
-│   └── wikilinks.test.js # Wikilinks functionality tests
 ├── public/               # Static assets
-├── astro.config.mjs      # Astro configuration with integrations
-├── package.json          # Dependencies and scripts
-├── tailwind.config.js    # Tailwind CSS configuration with typography
-├── tsconfig.json         # TypeScript configuration (strict mode)
-└── vitest.config.js      # Vitest test configuration
+└── [config files]       # Astro, Tailwind, and test configuration
 ```
 
 ## 🧞 Commands
@@ -75,37 +53,18 @@ All commands are run from the root of the project, from a terminal:
 | `npm run sync:push`  | Push content back to Obsidian vault              |
 | `npm run test`       | Run tests in watch mode                          |
 | `npm run test:run`   | Run tests once                                   |
+| `npm run check-dated`| Analyze content aging and disclaimer system      |
 
 > **Note**: The search functionality requires a production build (`npm run build`) to work properly as it depends on Pagefind indexing.
 
-## 🛠️ Tech Stack & Dependencies
+## 🛠️ Tech Stack
 
-### Core Framework
-
-- **[Astro](https://astro.build)** - Static site generator with content collections
-- **[TypeScript](https://www.typescriptlang.org/)** - Type safety with strict mode enabled
-
-### Integrations & Plugins
-
-- **[@astrojs/tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/)** - Utility-first CSS framework
-- **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** - Automatic sitemap generation
-- **[@astrojs/rss](https://docs.astro.build/en/guides/rss/)** - RSS feed generation
-- **[remark-wiki-link](https://github.com/landakram/remark-wiki-link)** - Wiki-style internal linking
-- **Custom remark plugins** - Enhanced linking and processing for wiki-style content
-
-### Search & Discovery
-
-- **[Pagefind](https://pagefind.app/)** - Fast, low-bandwidth search indexing
-- **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)** - Beautiful typography styles
-
-### Development & Quality
-
-- **[Vitest](https://vitest.dev/)** - Fast unit testing framework with TypeScript support
-- **[astro-broken-links-checker](https://github.com/imazen/astro-broken-link-checker)** - Automated link validation during builds
-
-### Content Management
-
-- **Obsidian Integration** - Bidirectional content sync workflow using `rsync`
+**Core**: [Astro](https://astro.build) + [TypeScript](https://www.typescriptlang.org/) with strict mode
+**Styling**: [Tailwind CSS](https://tailwindcss.com/) with Typography plugin
+**Search**: [Pagefind](https://pagefind.app/) for fast, client-side search
+**Content**: Obsidian integration with wiki-style linking via remark plugins
+**Testing**: [Vitest](https://vitest.dev/) with TypeScript support
+**Quality**: Automatic sitemap, RSS feeds, and broken link checking
 
 ## 🛠️ Development Workflow
 
@@ -118,11 +77,7 @@ All commands are run from the root of the project, from a terminal:
 
 ### Content Management with Obsidian
 
-This project features seamless integration with Obsidian for content creation and management through automated sync scripts.
-
-#### Content Sync Workflow
-
-Use the built-in sync commands to manage content between your Obsidian vault and the project:
+The project features seamless integration with Obsidian for content creation through automated sync scripts:
 
 ```bash
 # Pull content from Obsidian to project (standard workflow)
@@ -132,44 +87,79 @@ npm run sync
 npm run sync:push
 ```
 
-#### Complete Workflow
+**Workflow**: Create and edit in Obsidian → Sync to project → Develop with hot reloading → Build with search indexing → Deploy
 
-1. **Create in Obsidian**: Write and edit blog posts in your Obsidian vault with full markdown support
-2. **Sync to Project**: Run `npm run sync` to pull content into the Astro project structure
-3. **Develop & Test**: Use standard Astro development workflow (`npm run dev`) with hot reloading
-4. **Build & Deploy**: Use `npm run build` to create production build with Pagefind search indexing
-5. **Optional Push Back**: Use `npm run sync:push` to sync changes back to Obsidian vault
+## ⚠️ Smart Content Dating System
 
-### Development Features
+The blog includes an intelligent system for automatically flagging potentially outdated technical content to maintain reader trust and content quality.
 
-- **Hot Reloading**:
-  - Source files (components, layouts, styles) → instant updates
-  - Content files (blog posts, pages) → automatic refresh
-  - Config changes → restart dev server
-- **TypeScript**: Strict mode enabled with full type checking
-- **Search Indexing**: Automatically built during production builds (requires `npm run build`)
-- **Mobile-First**: Responsive design with mobile navigation and search
-- **Link Validation**: Automatic broken link detection during builds (logs to `broken-links.log`)
+### How It Works
 
-## 🧪 Testing
+- **Dynamic Detection**: Client-side JavaScript automatically evaluates post age and technology tags
+- **Age Buckets**: Different technologies have different aging thresholds
+- **Real-time Aging**: Content automatically ages into disclaimers without requiring site rebuilds
+- **Manual Overrides**: Support for frontmatter flags `forceShowDatedDisclaimer` and `forceHideDatedDisclaimer`
 
-The project includes test coverage for core functionality:
+### Configuration
 
-- **Vitest**: Fast unit testing framework with TypeScript support
-- **Wikilinks Testing**: Comprehensive tests for the custom remark wikilinks plugin
-- **Test Commands**: Run `npm run test` for watch mode or `npm run test:run` for single run
+The system is configured via `src/config/dated-content.json` with tag-based aging rules:
 
-Tests are located in the `test/` directory and cover critical functionality like content processing and internal linking.
+```json
+{
+  "ageBuckets": [
+    {
+      "ageInMonths": 6,
+      "tags": ["ai", "chatgpt", "whisper"]
+    },
+    {
+      "ageInMonths": 24,
+      "tags": ["rails", "ruby", "tools"]
+    }
+  ]
+}
+```
 
-## 🔍 Search & Navigation Features
+### Maintenance
 
-- **Keyboard Shortcuts**: Press `/` to open search from anywhere
-- **Mobile Optimized**: Touch-friendly search interface with swipe navigation
-- **Tag Browsing**: Discover content by topics at `/tags`
-- **RSS Feed**: Subscribe to updates at `/rss.xml`
-- **Automatic Sitemap**: SEO-optimized site structure
-- **Reading Time**: Calculated automatically for each post
-- **Wiki Links**: Internal post linking with `[[Post Title]]` syntax
+Use the built-in audit tool to maintain the system:
+
+```bash
+npm run check-dated
+```
+
+This command provides:
+
+- Analysis of posts by age bucket
+- Detection of unused configuration tags
+- Identification of post tags not in any bucket
+- Manual override analysis
+- Summary statistics
+
+### Frontmatter Options
+
+```yaml
+# Force show disclaimer (overrides automatic detection)
+forceShowDatedDisclaimer: true
+
+# Force hide disclaimer (prevents automatic detection)
+forceHideDatedDisclaimer: true
+```
+
+Note: Zod validation prevents both flags from being true simultaneously.
+
+## 🧪 Testing & Quality
+
+**Test Framework**: Vitest with TypeScript support
+**Coverage**: Wikilinks plugin and core functionality
+**Commands**: `npm run test` (watch) or `npm run test:run` (single run)
+**Quality Assurance**: Automatic broken link detection during builds
+
+## 🔍 Features & Navigation
+
+**Search**: Press `/` to search, mobile-optimized interface
+**Content Discovery**: Tag browsing at `/tags`, RSS feed at `/rss.xml`
+**Enhanced Content**: Reading time calculation, wiki-style `[[linking]]`
+**Performance**: Mobile-first responsive design with smooth transitions
 
 ## Show your support
 
