@@ -9,7 +9,6 @@
     "astro": "astro",
     "sync": "./scripts/sync-content.sh",
     "sync:push": "./scripts/sync-content.sh --push",
-    "convert-images": "node scripts/convert-obsidian-images.js",
     "test": "vitest",
     "test:run": "vitest run",
     "test:watch": "vitest --watch",
