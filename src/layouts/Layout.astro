@@ -132,7 +132,21 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
         const input = document.getElementById('search-input');
         if (modal && input) {
           modal.classList.remove('hidden');
+
+          // Prevent iOS zoom on input focus by temporarily setting viewport
+          const viewport = document.querySelector('meta[name="viewport"]');
+          const originalContent = viewport.content;
+
+          // Set viewport to prevent zoom during focus
+          viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+
           input.focus();
+
+          // Restore original viewport after a short delay
+          setTimeout(() => {
+            viewport.content = originalContent;
+          }, 300);
+
           document.body.style.overflow = 'hidden';
 
           // Track search modal opened

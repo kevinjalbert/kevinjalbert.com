@@ -2,9 +2,9 @@
 // SearchModal.astro - A modal search component using Pagefind
 ---
 
-<div id="search-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+<div id="search-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden overflow-x-hidden">
   <div class="flex items-start justify-center min-h-screen pt-4 sm:pt-16 px-2 sm:px-4">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-2 sm:mx-0">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-auto" style="max-width: calc(100vw - 16px)">
       <!-- Search Input -->
       <div class="p-3 sm:p-4 border-b border-gray-200">
         <div class="relative">
@@ -15,7 +15,7 @@
             id="search-input"
             type="text"
             placeholder="Search articles..."
-            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm sm:text-base"
+            class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-base"
             autocomplete="off"
             spellcheck="false"
           />
@@ -90,5 +90,21 @@
 
   kbd {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  /* Prevent iOS zoom on input focus */
+  #search-input {
+    font-size: 16px !important;
+  }
+
+  /* Ensure the modal doesn't cause horizontal scroll on mobile */
+  #search-modal {
+    overflow-x: hidden;
+  }
+
+  #search-modal .bg-white {
+    max-width: calc(100vw - 16px);
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
