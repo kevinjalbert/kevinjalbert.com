@@ -22,7 +22,7 @@
 Modern Astro project with content collections and integrated tooling:
 
 ```text
-kevinjalbert.github.io/
+kevinjalbert.com/
 ├── src/
 │   ├── components/       # Reusable Astro components
 │   │   └── SearchModal.astro  # Advanced search modal with Pagefind
@@ -45,17 +45,20 @@ kevinjalbert.github.io/
 │   └── content/          # Content collections (synced from Obsidian)
 │       ├── blog/         # Blog posts (markdown files)
 │       ├── pages/        # Static pages (about, now, etc.)
-│       ├── images/       # Images (optimized by Astro)
 │       └── config.ts     # Content collection schemas
 ├── scripts/              # Content sync and utility scripts
 │   └── sync-content.sh   # Bidirectional Obsidian sync
-├── plugins/              # Custom Astro plugins
-│   └── remark-image-wikilinks.js  # Wiki-style image linking
+├── integrations/         # Custom Astro plugins and integrations
+│   └── remark-wikilinks.js   # Wiki-style linking for pages and images
+├── test/                 # Test files
+│   ├── README.md         # Test documentation
+│   └── wikilinks.test.js # Wikilinks functionality tests
+├── public/               # Static assets
 ├── astro.config.mjs      # Astro configuration with integrations
 ├── package.json          # Dependencies and scripts
-├── tailwind.config.js    # Main Tailwind CSS configuration with typography
-├── tailwind.config.mjs   # Duplicate Tailwind configuration (same as .js)
-└── tsconfig.json         # TypeScript configuration (strict mode)
+├── tailwind.config.js    # Tailwind CSS configuration with typography
+├── tsconfig.json         # TypeScript configuration (strict mode)
+└── vitest.config.js      # Vitest test configuration
 ```
 
 ## 🧞 Commands
@@ -70,6 +73,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`    | Preview the built site locally                   |
 | `npm run sync`       | Pull content from Obsidian vault                 |
 | `npm run sync:push`  | Push content back to Obsidian vault              |
+| `npm run test`       | Run tests in watch mode                          |
+| `npm run test:run`   | Run tests once                                   |
 
 > **Note**: The search functionality requires a production build (`npm run build`) to work properly as it depends on Pagefind indexing.
 
@@ -86,12 +91,17 @@ All commands are run from the root of the project, from a terminal:
 - **[@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)** - Automatic sitemap generation
 - **[@astrojs/rss](https://docs.astro.build/en/guides/rss/)** - RSS feed generation
 - **[remark-wiki-link](https://github.com/landakram/remark-wiki-link)** - Wiki-style internal linking
-- **Custom remark plugins** - Enhanced image linking and processing
+- **Custom remark plugins** - Enhanced linking and processing for wiki-style content
 
 ### Search & Discovery
 
 - **[Pagefind](https://pagefind.app/)** - Fast, low-bandwidth search indexing
 - **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)** - Beautiful typography styles
+
+### Development & Quality
+
+- **[Vitest](https://vitest.dev/)** - Fast unit testing framework with TypeScript support
+- **[astro-broken-links-checker](https://github.com/imazen/astro-broken-link-checker)** - Automated link validation during builds
 
 ### Content Management
 
@@ -139,8 +149,17 @@ npm run sync:push
 - **TypeScript**: Strict mode enabled with full type checking
 - **Search Indexing**: Automatically built during production builds (requires `npm run build`)
 - **Mobile-First**: Responsive design with mobile navigation and search
+- **Link Validation**: Automatic broken link detection during builds (logs to `broken-links.log`)
 
-> **Note**: There are duplicate Tailwind configuration files (`tailwind.config.js` and `tailwind.config.mjs`) with identical content. Consider removing one to avoid confusion.
+## 🧪 Testing
+
+The project includes test coverage for core functionality:
+
+- **Vitest**: Fast unit testing framework with TypeScript support
+- **Wikilinks Testing**: Comprehensive tests for the custom remark wikilinks plugin
+- **Test Commands**: Run `npm run test` for watch mode or `npm run test:run` for single run
+
+Tests are located in the `test/` directory and cover critical functionality like content processing and internal linking.
 
 ## 🔍 Search & Navigation Features
 
@@ -158,4 +177,4 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-This project is [MIT](https://github.com/kevinjalbert/kevinjalbert.github.io/blob/main/LICENSE) licensed.
+This project is [MIT](https://github.com/kevinjalbert/kevinjalbert.com/blob/main/LICENSE) licensed.
