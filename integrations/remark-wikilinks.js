@@ -10,10 +10,14 @@ import { join, extname } from 'path';
 export default function remarkWikilinks() {
   let titleToPermalink = {};
   let isInitialized = false;
+  let initializationPromise = null;
 
   // Build mapping of titles to permalinks by reading all markdown files recursively
   async function buildTitleMapping() {
     if (isInitialized) return;
+    if (initializationPromise) return initializationPromise;
+
+    initializationPromise = (async () => {
 
     try {
       const contentDir = './src/content/blog';
@@ -65,6 +69,9 @@ export default function remarkWikilinks() {
     } catch (error) {
       console.warn('Could not build title to permalink mapping:', error);
     }
+    })();
+
+    return initializationPromise;
   }
 
   return async (tree, file) => {
