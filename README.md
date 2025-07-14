@@ -43,17 +43,21 @@ kevinjalbert.com/
 
 All commands are run from the root of the project, from a terminal:
 
-| Command              | Action                                           |
-|:---------------------|:-------------------------------------------------|
-| `npm install`        | Install dependencies                             |
-| `npm run dev`        | Start development server                         |
-| `npm run build`      | Build site + generate search index with Pagefind |
-| `npm run preview`    | Preview the built site locally                   |
-| `npm run sync`       | Pull content from Obsidian vault                 |
-| `npm run sync:push`  | Push content back to Obsidian vault              |
-| `npm run test`       | Run tests in watch mode                          |
-| `npm run test:run`   | Run tests once                                   |
-| `npm run check-dated`| Analyze content aging and disclaimer system      |
+| Command                         | Action                                                  |
+|:--------------------------------|:--------------------------------------------------------|
+| `npm install`                   | Install dependencies                                    |
+| `npm run dev`                   | Start development server                                |
+| `npm run build`                 | Build site + generate search index with Pagefind        |
+| `npm run preview`               | Preview the built site locally                          |
+| `npm run sync`                  | Pull content from Obsidian vault                        |
+| `npm run sync:push`             | Push content back to Obsidian vault                     |
+| `npm run test`                  | Run tests in watch mode                                 |
+| `npm run test:run`              | Run tests once                                          |
+| `npm run check-dated`           | Analyze content aging and disclaimer system             |
+| `npm run check-links`           | Run comprehensive link validation (all types)           |
+| `npm run check-links:self`      | Prevent absolute/relative links to own site             |
+| `npm run check-links:internal`  | Validate internal links via astro-broken-links-checker  |
+| `npm run check-links:external`  | Check external links with markdown-link-check           |
 
 > **Note**: The search functionality requires a production build (`npm run build`) to work properly as it depends on Pagefind indexing.
 
@@ -152,7 +156,16 @@ Note: Zod validation prevents both flags from being true simultaneously.
 **Test Framework**: Vitest with TypeScript support
 **Coverage**: Wikilinks plugin and core functionality
 **Commands**: `npm run test` (watch) or `npm run test:run` (single run)
-**Quality Assurance**: Automatic broken link detection during builds
+
+### Link Validation
+
+The project includes comprehensive link checking with three distinct approaches:
+
+- **Self Links** (`check-links:self`): Prevents absolute links to own domain and relative markdown links to maintain consistent linking patterns
+- **Internal Links** (`check-links:internal`): Validates internal links using astro-broken-links-checker during build
+- **External Links** (`check-links:external`): Checks external URLs using markdown-link-check
+
+Run `npm run check-links` for complete validation or use individual commands for targeted checking.
 
 ## 🔍 Features & Navigation
 

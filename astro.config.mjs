@@ -36,11 +36,8 @@ export default defineConfig({
     tailwind(),
     astroBrokenLinksChecker({
       logFilePath: 'broken-links.log', // Log broken links to a file
-      checkExternalLinks: false, // Set to true if you want to check external links (slower)
-      // Additional options available:
-      // checkExternalLinks: true, // Enable to check external URLs (much slower)
-      // timeoutMs: 3000, // Timeout for external link checks
-      // retries: 3 // Number of retries for failed external links
+      throwError: true, // Fail the build if broken links are detected
+      checkExternalLinks: false // Only check internal links
     })
   ]
 });

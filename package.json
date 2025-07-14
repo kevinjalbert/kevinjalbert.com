@@ -12,8 +12,10 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:watch": "vitest --watch",
-    "check-links": "astro build",
+    "check-links": "npm run check-links:self && npm run check-links:internal && npm run check-links:external",
     "check-links:internal": "astro build",
+    "check-links:external": "find src/content -name '*.md' -exec markdown-link-check --config markdown-link-check.json {} \\;",
+    "check-links:self": "(grep -r 'https://kevinjalbert\\.com/' src/content/ && echo 'ERROR: Found absolute links to own site. Use wikilinks instead.' && exit 1) || (grep -r '\\[.*\\](/[^)]*)' src/content/ && echo 'ERROR: Found relative links. Use wikilinks instead.' && exit 1) || echo 'No problematic internal links found.'",
     "check-dated": "node scripts/check-dated.js"
   },
   "dependencies": {
@@ -33,6 +35,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/typography": "^0.5.16",
     "astro-broken-links-checker": "github:imazen/astro-broken-link-checker",
+    "markdown-link-check": "^3.13.7",
     "pagefind": "^1.3.0",
     "remark-parse": "^11.0.0",
     "remark-stringify": "^11.0.0",
