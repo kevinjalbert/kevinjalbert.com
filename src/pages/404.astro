@@ -1,57 +1,45 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Page Not Found | Kevin Jalbert</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-</head>
-<body>
-  <div style="
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9fafb;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  ">
-    <div style="text-align: center; padding: 2rem;">
-      <h1 style="
-        font-size: 6rem;
-        font-weight: bold;
-        color: #374151;
-        margin: 0;
-        line-height: 1;
-      ">404</h1>
-      <h2 style="
-        font-size: 1.5rem;
-        color: #6b7280;
-        margin: 1rem 0;
-        font-weight: normal;
-      ">Page Not Found</h2>
-      <p style="
-        color: #9ca3af;
-        margin: 1rem 0;
-        max-width: 400px;
-      ">
+<Layout
+  title="404 - Page Not Found | Kevin Jalbert"
+  description="The page you're looking for doesn't exist or has been moved."
+>
+  <div class="min-h-[60vh] flex items-center justify-center">
+    <div class="text-center px-4">
+      <h1 class="text-8xl md:text-9xl font-bold text-gray-300 mb-4">404</h1>
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Page Not Found</h2>
+      <p class="text-gray-600 mb-8 max-w-md mx-auto">
         The page you're looking for doesn't exist or has been moved.
+        Try searching for what you need or head back home.
       </p>
-      <a href="/" style="
-        display: inline-block;
-        background-color: #3b82f6;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        text-decoration: none;
-        font-weight: 500;
-        margin-top: 1rem;
-        transition: background-color 0.2s;
-      ">
-        Go Home
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="/"
+          class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          Go Home
+        </a>
+        <button
+          id="404-search-trigger"
+          class="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          Search Site
+        </button>
+      </div>
     </div>
   </div>
-</body>
-</html>
+
+  <script>
+    // Connect the 404 search button to the existing search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchButton = document.getElementById('404-search-trigger');
+      if (searchButton && window.openSearch) {
+        searchButton.addEventListener('click', function() {
+          window.openSearch('404_page');
+        });
+      }
+    });
+  </script>
+</Layout>
