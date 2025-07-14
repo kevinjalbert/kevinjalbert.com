@@ -21,7 +21,14 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
     <meta charset="UTF-8" />
     <meta name="description" content={description || "Kevin Jalbert's Blog"} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Favicon and app icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#2563eb" />
+
     <link rel="alternate" type="application/rss+xml" title="Kevin Jalbert's Blog" href="/rss.xml" />
     <link rel="canonical" href={canonicalURL} />
     <title>{title}</title>
