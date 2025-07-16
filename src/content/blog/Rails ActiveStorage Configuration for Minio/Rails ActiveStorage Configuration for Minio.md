@@ -9,8 +9,6 @@ tags:
   - rails
   - minio
 pubDate: 2018-02-26T00:00:00.000Z
-heroImage: assets/birdy-boxcar.jpg
-heroImageAlt: "'[birdy boxcar](https://flickr.com/photos/agent\_ladybug/661200957 \"birdy boxcar\") by [b.ug](https://flickr.com/people/agent_ladybug) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)'"
 permalink: rails-activestorage-configuration-for-minio
 ---
 

@@ -7,12 +7,6 @@ tags:
   - testing
   - ruby
 pubDate: 2021-08-29T00:00:00.000Z
-heroImage: assets/hammer-clock.jpg
-heroImageAlt: >-
-  '[Book,Clock and Hammer](https://flickr.com/photos/91261194@N06/45404836131
-  "Book,Clock and Hammer") by
-  [focusonmore.com](https://flickr.com/people/91261194@N06) is licensed under
-  [CC BY](https://creativecommons.org/licenses/by/2.0/)'
 permalink: stub-sleeps-in-tests
 ---
 

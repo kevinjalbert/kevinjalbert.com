@@ -13,11 +13,6 @@ tags:
 date: 2019-06-04T00:00:00.000Z
 content: Add YouTube links to supplementary videos.
 pubDate: 2019-05-28T00:00:00.000Z
-heroImage: assets/notebook.jpg
-heroImageAlt: >-
-  '[notebook](https://flickr.com/photos/markusspiske/14164315519 "notebook") by
-  [markus spiske](https://flickr.com/people/markusspiske) is licensed under [CC
-  BY](https://creativecommons.org/licenses/by/2.0/)'
 permalink: my-weekly-notion-setup
 ---
 

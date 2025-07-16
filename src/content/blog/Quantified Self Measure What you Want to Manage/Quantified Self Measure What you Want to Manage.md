@@ -9,13 +9,6 @@ tags:
   - self-improvement
   - quantified-self
 pubDate: 2022-09-30T00:00:00.000Z
-heroImage: assets/measuring-tools.jpg
-heroImageAlt: >-
-  '[Woodworking Measuring Tools on the wooden table
-  background](https://flickr.com/photos/30478819@N08/50643184108 "Woodworking
-  Measuring Tools on the wooden table background") by
-  [wuestenigel](https://flickr.com/people/30478819@N08) is licensed under [CC
-  BY](https://creativecommons.org/licenses/by/2.0/)'
 permalink: quantified-self-measure-what-you-want-to-manage
 ---
 
