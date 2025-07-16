@@ -30,13 +30,13 @@ const processedPullImageAttribution = pullImageAttribution ? marked.parseInline(
       />
       {pullImageAttribution && (
         <div class="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-          <span set:html={pullImageAttribution} />
+          <span set:html={processedPullImageAttribution} />
         </div>
       )}
     </div>
     {heroImageAlt && (
       <div class="py-2">
-        <p class="text-xs text-gray-500 text-center italic [&_a]:text-blue-600 [&_a:hover]:text-blue-800 [&_a]:transition-colors" set:html={heroImageAlt} />
+        <p class="text-xs text-gray-500 text-center italic [&_a]:text-blue-600 [&_a:hover]:text-blue-800 [&_a]:transition-colors" set:html={processedHeroImageAlt} />
       </div>
     )}
   </div>
