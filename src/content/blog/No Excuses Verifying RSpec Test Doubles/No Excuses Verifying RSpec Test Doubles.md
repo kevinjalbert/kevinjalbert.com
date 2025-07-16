@@ -9,7 +9,6 @@ tags:
   - rspec
   - testing
 date: 2016-01-23T00:00:00.000Z
-type: add
 content: >-
   Mention of RSpec 3.2's support for dynamic column methods defined by
   ActiveRecord in the context of `instance_double`.

@@ -11,7 +11,6 @@ tags:
   - productivity
   - organization
 date: 2019-06-04T00:00:00.000Z
-type: add
 content: Add YouTube links to supplementary videos.
 pubDate: 2019-05-28T00:00:00.000Z
 heroImage: assets/notebook.jpg

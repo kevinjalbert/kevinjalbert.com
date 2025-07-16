@@ -10,7 +10,6 @@ tags:
   - rspec
   - testing
 date: 2016-02-25T00:00:00.000Z
-type: add
 content: >-
   Mention of RSpec 3.3's support for `aggregate_failures` feature, which
   combines the best of both testing approaches.
