@@ -33,7 +33,7 @@ The above screenshot shows a typical afternoon for me. Let me break down the two
 
 It can be easy to just eat at your desk quickly and keep on working. Working from home presents unique ways to handle your lunchtime. Offices have built-in mechanisms to relieve stress, like ranting to a colleague about the problem you're hitting, socializing humor and antics, off-topic conversations, etc. For me, it's about making the best use of my time as a dedicated break to relax the brain.
 
-I took an example from [Mitchell Hashimoto to block time for lunch](https://twitter.com/mitchellh/status/1074709385266442246). That time block can move, but I try to ensure that I take an actual lunch. This is time is where I can focus on my family without work distractions (i.e., email and slack) and be present mentally. In the event that I'm home alone, I'll eat and read, I'll do some chores or tidying on the main floor while listening to a podcast, and still take the full lunch hour.
+I took an example from [Mitchell Hashimoto to block time for lunch](https://x.com/mitchellh/status/1074709385266442246). That time block can move, but I try to ensure that I take an actual lunch. This is time is where I can focus on my family without work distractions (i.e., email and slack) and be present mentally. In the event that I'm home alone, I'll eat and read, I'll do some chores or tidying on the main floor while listening to a podcast, and still take the full lunch hour.
 
 I'm hoping to loop in some regular lunch outings with a remote friend in the neighbourhood who also works in the software domain. I suspect this will help us both get out of the house and provide a listening ear.
 

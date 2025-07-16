@@ -14,7 +14,7 @@ heroImageAlt: Screeshot of Slack's Reminder Help
 permalink: slack-reminding-users-and-channels
 ---
 
-[Slack](https://slack.com/) has taken over communication for workplace environments, at least within tech circles surrounding me. I realize there are many competitors, and I have even used some of them in the past, but to me Slack is my preferred choice. If you haven't given Slack a try, I highly recommend it! At [theScore](http://company.thescore.com/) we heavily use Slack.
+[Slack](https://slack.com/) has taken over communication for workplace environments, at least within tech circles surrounding me. I realize there are many competitors, and I have even used some of them in the past, but to me Slack is my preferred choice. If you haven't given Slack a try, I highly recommend it! At [theScore](https://www.scoremediaandgaming.com/about) we heavily use Slack.
 
 This post will be short and focused on [Slack Reminders](https://get.slack.help/hc/en-us/articles/208423427). From what I've experienced with coworkers, they only knew of and used a small subset of Slack Reminder's feature set. This post is going to demonstrate what you can do with Slack Reminders, mainly assigning reminders to users and channels.
 

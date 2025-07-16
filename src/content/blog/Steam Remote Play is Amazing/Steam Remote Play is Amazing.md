@@ -43,7 +43,7 @@ I take advantage of [_Wake-on-LAN_](https://docs.microsoft.com/en-us/troubleshoo
 
 ### Non-Steam Games
 
-I also found out you can add [Non-Steam games](https://help.steampowered.com/en/faqs/view/4B8B-9697-2338-40EC), which still work via Steam Remote Play. This opens up a lot of opportunities as Steam is essentially opening/closing an executable. You could have games from another store (e.g., [Epic Games](https://www.[epicgames.com/store)), stand-alone games, or even ROMs if you are into that (via [Steam ROM Manager](https://steamgriddb.github.io/steam-rom-manager/)).
+I also found out you can add [Non-Steam games](https://help.steampowered.com/en/faqs/view/4B8B-9697-2338-40EC), which still work via Steam Remote Play. This opens up a lot of opportunities as Steam is essentially opening/closing an executable. You could have games from another store (e.g., [Epic Games](https://store.epicgames.com/)), stand-alone games, or even ROMs if you are into that (via [Steam ROM Manager](https://steamgriddb.github.io/steam-rom-manager/)).
 
 ### Dedicated Controller
 

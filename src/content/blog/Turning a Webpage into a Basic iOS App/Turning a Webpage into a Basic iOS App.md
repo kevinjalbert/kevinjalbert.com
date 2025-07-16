@@ -33,4 +33,4 @@ I'll keep this part short as I didn't pioneer this and mainly want to share the 
 
 The TL;DR point is to use this [iOS Shortcut ("Make app from url")](https://www.icloud.com/shortcuts/d18b423ea42d47fbb82a03d07156c747). There might be other ways to accomplish this, but I found this way works quite well.
 
-Following the above allows you to create basic iOS applications for any webpage or web application. I am particularly fond of using it for [ChatGPT](https://chat.openai.com/chat) right now.
+Following the above allows you to create basic iOS applications for any webpage or web application. I am particularly fond of using it for [ChatGPT](https://chatgpt.com/) right now.

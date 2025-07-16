@@ -55,4 +55,4 @@ I've published the Alfred Workflow and Python scripts in a [repository on GitHub
 
 I like to remind everyone that this is _my tailored solution_ on how I've integrated Notion to fit _my needs_. If you want to use my solution as inspiration or as a foundation, everything is open sourced. If you want to use it verbatim, then don't forget to get the weekly template.
 
-**NOTE:** [v1.0.0](https://github.com/kevinjalbert/alfred-notion/tree/v1.0.0) is current at the time of publication (June 16, 2019).
+**NOTE:** [v1.0.0](https://github.com/kevinjalbert/notion-toolbox/tree/9582299d7b4022f2d0f8debf72827b840634eefd) is current at the time of publication (June 16, 2019).

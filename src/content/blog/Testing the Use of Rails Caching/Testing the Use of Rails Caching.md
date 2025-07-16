@@ -168,4 +168,4 @@ class CachingTest < ActiveSupport::TestCase
 end
 ```
 
-Note that this approach worked for me, however, there are many different ways to test Rails caching. For example, this [StackOverflow answer](https://stackoverflow.com/a/9603083/583592) suggests making an `InspectableMemoryStore` which subclasses `ActiveSupport::Cache::MemoryStore`.
+Note that this approach worked for me, however, there are many different ways to test Rails caching. For example, this [StackOverflow answer](https://stackoverflow.com/a/9603083) suggests making an `InspectableMemoryStore` which subclasses `ActiveSupport::Cache::MemoryStore`.

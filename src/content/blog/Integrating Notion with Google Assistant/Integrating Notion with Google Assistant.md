@@ -20,7 +20,7 @@ permalink: integrating-notion-with-google-assistant
 
 Building off two of my previous posts ([[../My Weekly Notion Setup/My Weekly Notion Setup|My Weekly Notion Setup]] and [[../Integrating Notion with Alfred/Integrating Notion with Alfred|Integrating Notion with Alfred]]), I decided to further integrate [Notion [Referral]](https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e) with [Google Assistant](https://assistant.google.com/).
 
-Google Assistant is never too far away from me. I almost always have my phone within arms reach, and I also have multiple Google devices throughout my house. In the past, I've used other productivity applications in conjunction with Google Assistant (i.e., [Evernote](https://help.evernote.com/hc/en-us/articles/360000930107-How-to-use-Google-Assistant-with-Evernote), and [Todoist](https://get.todoist.help/hc/en-us/articles/115000056165-How-can-I-use-Todoist-with-Google-Assistant-)) to capture notes and tasks. With my recent commitment to Notion, I've been missing this integration.
+Google Assistant is never too far away from me. I almost always have my phone within arms reach, and I also have multiple Google devices throughout my house. In the past, I've used other productivity applications in conjunction with Google Assistant (i.e., Evernote, and Todoist) to capture notes and tasks. With my recent commitment to Notion, I've been missing this integration.
 
 # The Goal
 

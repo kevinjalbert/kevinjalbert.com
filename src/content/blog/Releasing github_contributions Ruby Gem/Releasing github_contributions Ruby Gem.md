@@ -21,7 +21,7 @@ This post is more of an announcement of my new [Ruby gem `github_contributions`]
 
 > Ever wanted to know where you (or someone else) are making contributions on GitHub?
 
-Your GitHub profile shows you the [Contributions Calendar](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-graphs-on-your-profile/viewing-contributions-on-your-profile#contributions-calendar) and [Contribution activity](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-graphs-on-your-profile/viewing-contributions-on-your-profile#contribution-activity), which both provide great visualizations and details covering contributions of the following:
+Your GitHub profile shows you the [Contributions Calendar](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/viewing-contributions-on-your-profile#contributions-calendar) and [Contribution activity](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/viewing-contributions-on-your-profile#contribution-activity), which both provide great visualizations and details covering contributions of the following:
 
   - creating/closing issues
   - creating/closing/merging/reviewing pull requests

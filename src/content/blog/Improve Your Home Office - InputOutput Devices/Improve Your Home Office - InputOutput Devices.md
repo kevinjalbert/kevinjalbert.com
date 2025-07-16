@@ -77,7 +77,7 @@ I'd argue that the keyboard is the most used device you have. As with most thing
 
 There is a strong [community](https://www.reddit.com/r/MechanicalKeyboards/) for mechanical keyboards that offer near unlimited customization options. To start with, you can vary the size, keycaps, and key switches to fit your style. These customizations create unique typing experiences that can be more enjoyable and ergonomic.
 
-There is also a large space for ergonomic keyboards -- defined by their unorthodox physical layout. For example, the [Microsoft Sculpt Ergonomic Desktop](https://www.microsoft.com/accessories/en-ca/products/keyboards/sculpt-ergonomic-desktop/l5v-00002) has a defined split and curved design. Most ergonomic keyboards fall under the mechanical keyboard umbrella.
+There is also a large space for ergonomic keyboards -- defined by their unorthodox physical layout. For example, the [Microsoft Sculpt Ergonomic Desktop](https://web.archive.org/web/20201112035236/https://www.microsoft.com/accessories/en-ca/products/keyboards/sculpt-ergonomic-desktop/l5v-00002) has a defined split and curved design. Most ergonomic keyboards fall under the mechanical keyboard umbrella.
 
 If you value a clean work surface a wireless keyboard is a nice way to minimize wire clutter. It is worth noting that oftentimes the higher-end mechanical keyboards require a wired connection.
 

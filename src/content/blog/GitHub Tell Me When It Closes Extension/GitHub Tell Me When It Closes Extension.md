@@ -15,9 +15,9 @@ heroImageAlt: >-
 permalink: github-tell-me-when-it-closes-extension
 ---
 
-[Tell Me When It Closes](https://tellmewhenitcloses.com/) is an amazing service by [thoughtbot](https://thoughtbot.com/). Often I'll find an issue or pull request on GitHub for a tool I use and I just want to know _when_ it closes what the result was. I don't care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.
+[Tell Me When It Closes](https://web.archive.org/web/20190217202422/https://tellmewhenitcloses.com/session/new) is an amazing service by [thoughtbot](https://thoughtbot.com/). Often I'll find an issue or pull request on GitHub for a tool I use and I just want to know _when_ it closes what the result was. I don't care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.
 
-The issue I ran into was the limited ways to integrate this into my workflow. Looking at the ways you can [subscribe to issues and pull requests](https://tellmewhenitcloses.com/subscribing), it's a bookmarklet that runs JavaScript. I don't use the bookmark bar in my chrome browser (or browser bookmarks), so that solution wasn't ideal.
+The issue I ran into was the limited ways to integrate this into my workflow. Looking at the ways you can [subscribe to issues and pull requests](https://web.archive.org/web/20220702140245/https://tellmewhenitcloses.com/subscribing), it's a bookmarklet that runs JavaScript. I don't use the bookmark bar in my chrome browser (or browser bookmarks), so that solution wasn't ideal.
 
 My old workflow for subscribing to an issue on Tell Me When It Closes was:
 
@@ -49,6 +49,6 @@ Now my workflow for subscribing to an issue on Tell Me When It Closes is:
 # Links
 
 * [GitHub Repository](https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension)
-* [Chrome Extension](https://chrome.google.com/webstore/detail/github-tell-me-when-it-cl/mfaeeelmjfbblmkbalffbhfpkhhnjalp)
-* [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/github-tell-me-when-it-closes/)
-* [Opera Add-on](https://addons.opera.com/en/extensions/details/github-tell-me-when-it-closes)
+* ~~Chrome Extension~~ (doesn't work anymore)
+* ~~Firefox Add-on~~ (doesn't work anymore)
+* ~~Opera Add-on~~ (doesn't work anymore)

@@ -35,7 +35,7 @@ Since the beginning, I have hosted my dotfiles on GitHub. For the most part, I'v
 
 I've built up a [Rakefile](https://github.com/kevinjalbert/dotfiles/blob/6585c9a7e1ae1926fcaf2210d48be23a2e988bdb/Rakefile) that orchestrates the install/update/backup/uninstall operations of my dotfiles.
 
-My dotfiles are specific for MacOS and take advantage of [homebrew](https://brew.sh/) to bootstrap the system. In addition, I also use [homebrew cask](https://caskroom.github.io/) and [mas](https://github.com/mas-cli/mas) to install system applications.
+My dotfiles are specific for MacOS and take advantage of [homebrew](https://brew.sh/) to bootstrap the system. In addition, I also use [homebrew cask](https://formulae.brew.sh/cask/) and [mas](https://github.com/mas-cli/mas) to install system applications.
 
 As previously mentioned, my dotfiles is a living repository -- it will continue to evolve and change. I make no guarantee that it'll still operate or use the same solution at the time this article was written. The `README.md` in the repository should always reflect the state of my dotfiles (although admittedly they are lacking as I write this).
 

@@ -67,9 +67,9 @@ A tried and tested approach to knowledge transfer is books. Writing a book is a 
 
 The podcasts I listen to traditionally follow the format of a host interviewing a person of interest within the topic's community of the podcast. Podcasts are interesting as their content can vary episode to episode, and can be heavily dependent on the people present. Sometimes there are musings on recent news, sometimes it is dissecting the success of an individual or project. I follow podcasts that are specific to my professional focus, although I'll admit even those offer highly entertaining facets due to the light-hearted nature of interviewing styles.
 
-## Twitter
+## Twitter (X)
 
-I've always found [Twitter](https://twitter.com/) to be hit-or-miss with respect to content. It's a lot more _raw_ in nature, and if you're following the right people you do get a glimmer of insight closer to their thought processes. In my opinion, keep Twitter for entertainment, and as a means for social connections. Also from my experience, if a nugget of information is linked to on Twitter, it normally ends up in another medium.
+I've always found [Twitter](https://x.com/) to be hit-or-miss with respect to content. It's a lot more _raw_ in nature, and if you're following the right people you do get a glimmer of insight closer to their thought processes. In my opinion, keep Twitter for entertainment, and as a means for social connections. Also from my experience, if a nugget of information is linked to on Twitter, it normally ends up in another medium.
 
 # Awareness of Emerging Trends
 

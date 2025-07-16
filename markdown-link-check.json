@@ -14,13 +14,61 @@
     },
     {
       "pattern": "^/"
+    },
+    {
+      "pattern": "^https://.*\\.stackexchange\\.com"
+    },
+    {
+      "pattern": "^https://stackoverflow\\.com"
+    },
+    {
+      "pattern": "^https://superuser\\.com"
+    },
+    {
+      "pattern": "^https://serverfault\\.com"
+    },
+    {
+      "pattern": "^https://www\\.kickstarter\\.com"
+    },
+    {
+      "pattern": "^https://www\\.jbl\\.com"
+    },
+    {
+      "pattern": "^https://expand\\.openviewpartners\\.com"
+    },
+    {
+      "pattern": "^http://api\\.dev"
+    },
+    {
+      "pattern": "^http://ember\\.dev"
+    },
+    {
+      "pattern": "^https://your_own_bucket\\.minio123\\.com"
+    },
+    {
+      "pattern": "^https://minio123\\.com"
+    },
+    {
+      "pattern": "^https://store\\.epicgames\\.com"
+    },
+    {
+      "pattern": "^https://help\\.x\\.com"
+    },
+    {
+      "pattern": "^https://www\\.freshconsulting\\.com"
+    },
+    {
+      "pattern": "^https://www\\.vidabox\\.com"
+    },
+    {
+      "pattern": "^https://www\\.kobo\\.com"
     }
   ],
   "httpHeaders": [
     {
-      "urls": ["https://github.com"],
+      "urls": ["https"],
       "headers": {
-        "User-Agent": "Mozilla/5.0 (compatible; markdown-link-check)"
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
       }
     }
   ],
@@ -28,5 +76,11 @@
   "retryOn429": true,
   "retryCount": 3,
   "fallbackRetryDelay": "30s",
-  "aliveStatusCodes": [200, 206, 429]
+  "aliveStatusCodes": [200, 206, 429],
+  "replacementPatterns": [
+    {
+      "pattern": "^(https?://[^#]+)#(.*)$",
+      "replacement": "$1"
+    }
+  ]
 }

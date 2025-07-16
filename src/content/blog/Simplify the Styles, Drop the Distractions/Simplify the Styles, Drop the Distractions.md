@@ -94,7 +94,7 @@ A styleguide and linter work hand-in-hand. Together they ensure that code that v
 
 If your team is completely set on having customized styles that differ from a popular styleguide, I would still encourage using one as a base. In an ideal scenario it is possible to use inheritance, where you can then inherit the rules from your choice of popular styleguide. If this isn't possible, then the next best option is to simply copy the whole guide and use that as your base and make modifications to it.
 
-Each styleguide/linter has their own implementation and handling of their configurations. You will have to explore each and see how to deal with the inheritance. For example, [ESLint](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) and [Rubocop](http://rubocop.readthedocs.io/en/latest/configuration/#inheritance) define how to extend/inherit from other styleguides.
+Each styleguide/linter has their own implementation and handling of their configurations. You will have to explore each and see how to deal with the inheritance. For example, [ESLint](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) and [Rubocop](https://docs.rubocop.org/rubocop/configuration.html#inheritance) define how to extend/inherit from other styleguides.
 
 ## Reduce the Distractions
 

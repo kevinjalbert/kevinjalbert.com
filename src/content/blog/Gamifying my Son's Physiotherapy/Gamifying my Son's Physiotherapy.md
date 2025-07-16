@@ -14,7 +14,7 @@ permalink: gamifying-my-sons-physiotherapy
 
 ## Context
 
-My oldest son is 5 years old at the time of writing this post. He has [Cerebral Palsy](https://www.cdc.gov/ncbddd/cp/facts.html) (fairly mild, but still affects motor control of his legs). To ensure he strengthens and improves his mobility, we are constantly doing physiotherapy. Between physiotherapy appointments, we supplement with daily at-home stretches and exercises.
+My oldest son is 5 years old at the time of writing this post. He has [Cerebral Palsy](https://www.cdc.gov/cerebral-palsy/about/) (fairly mild, but still affects motor control of his legs). To ensure he strengthens and improves his mobility, we are constantly doing physiotherapy. Between physiotherapy appointments, we supplement with daily at-home stretches and exercises.
 
 Trying to explain and motivate a young child on the benefits of physiotherapy is challenging. He doesn't quite understand the long-term benefits and implications of it. The other aspect is that there are _always_ more fun and interesting things to be doing other than stretches and exercises.
 

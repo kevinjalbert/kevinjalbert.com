@@ -47,7 +47,7 @@ I may be biased, but the source code is organized quite well in my opinion. The 
 
 ## Selecting a video input
 
-I had to select my iPhone for the video/audio inputs in QuickTime using AppleScript. A quick search turned up this [Stack Overflow question](https://stackoverflow.com/q/45228743/583592). It turns out that you _should_ be able to do the following:
+I had to select my iPhone for the video/audio inputs in QuickTime using AppleScript. A quick search turned up this [Stack Overflow question](https://stackoverflow.com/q/45228743). It turns out that you _should_ be able to do the following:
 
 ```applescript
 tell application "QuickTime Player"
@@ -71,7 +71,7 @@ After I was able to select the video input, the next problem is selecting the au
 
 I had noticed earlier that when the inputs menu was opened it would stay open for 7-8 seconds before making the menu item selection. I wasn't too concerned at the time, but after the whole automation was done it took just under 20 seconds to mirror my device.
 
-It took a lot of digging but I found a [Stack Overflow answer](https://apple.stackexchange.com/a/400163/228446) that provided the solution.
+It took a lot of digging but I found a [Stack Overflow answer](https://apple.stackexchange.com/a/400163) that provided the solution.
 
 ```applescript
 on openInputMenu()

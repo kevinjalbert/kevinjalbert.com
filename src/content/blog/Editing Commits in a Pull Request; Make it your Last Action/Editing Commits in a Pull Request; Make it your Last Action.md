@@ -27,10 +27,10 @@ In a collaborative setting (i.e., a Pull Request in GitHub), we want to [minimiz
 
 # Editing Commits
 
-For brevity, the details of how to edit commits can be found at the following [article by thoughtbot](https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history). As touched on in my [previous post](https://kevinjalbert.com/level-up-your-commit-messages/), you can _hide the [sausage making process](https://sethrobertson.github.io/GitBestPractices/#sausage)_ by amending and squashing commits. There are two main benefits to consolidating commits:
+For brevity, the details of how to edit commits can be found at the following [article by thoughtbot](https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history). As touched on in my [previous post](/level-up-your-commit-messages/), you can _hide the [sausage making process](https://sethrobertson.github.io/GitBestPractices/#sausage)_ by amending and squashing commits. There are two main benefits to consolidating commits:
 
 - The ability to `git bisect`, `git revert` and `git cherry-pick` work without much issue.
-- Commits are [atomic](https://www.freshconsulting.com/atomic-commits/) and provide better archaeological information in `git log` and `git blame` scenarios.
+- Commits are [atomic](https://www.freshconsulting.com/insights/blog/atomic-commits/) and provide better archaeological information in `git log` and `git blame` scenarios.
 
 # Cautiously Edit a Pull Request's Commits
 

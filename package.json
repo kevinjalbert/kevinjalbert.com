@@ -14,7 +14,7 @@
     "test:watch": "vitest --watch",
     "check-links": "npm run check-links:self && npm run check-links:internal && npm run check-links:external",
     "check-links:internal": "astro build",
-    "check-links:external": "find src/content -name '*.md' -exec markdown-link-check --config markdown-link-check.json {} \\;",
+    "check-links:external": "markdown-link-check --quiet --config markdown-link-check.json src/content",
     "check-links:self": "(grep -r 'https://kevinjalbert\\.com/' src/content/ && echo 'ERROR: Found absolute links to own site. Use wikilinks instead.' && exit 1) || (grep -r '\\[.*\\](/[^)]*)' src/content/ && echo 'ERROR: Found relative links. Use wikilinks instead.' && exit 1) || echo 'No problematic internal links found.'",
     "check-dated": "node scripts/check-dated.js"
   },

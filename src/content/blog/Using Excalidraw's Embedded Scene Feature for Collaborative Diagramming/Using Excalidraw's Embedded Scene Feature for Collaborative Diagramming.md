@@ -19,7 +19,7 @@ permalink: using-excalidraws-embedded-scene-feature-for-collaborative-diagrammin
 
 As a software developer, creating and modifying diagrams is an essential part of the job. [Excalidraw](https://excalidraw.com/) is a diagramming tool that offers flexibility, speed, and collaborative features for both personal and work scenarios.
 
-But what sets Excalidraw apart is its [embedded scene feature](https://twitter.com/excalidraw/status/1316001446043750400), which started out as an [idea captured in a GitHub Issue](https://github.com/excalidraw/excalidraw/issues/414). This feature allows diagrams to be saved as artifacts like PNG or SVG files while retaining the ability to modify them within Excalidraw. When exporting a PNG or SVG, the Excalidraw scene data is embedded inside the file artifact. This means that you can open the file in Excalidraw and continue modifying the diagram.
+But what sets Excalidraw apart is its [embedded scene feature](https://x.com/excalidraw/status/1316001446043750400), which started out as an [idea captured in a GitHub Issue](https://github.com/excalidraw/excalidraw/issues/414). This feature allows diagrams to be saved as artifacts like PNG or SVG files while retaining the ability to modify them within Excalidraw. When exporting a PNG or SVG, the Excalidraw scene data is embedded inside the file artifact. This means that you can open the file in Excalidraw and continue modifying the diagram.
 
 ## Benefits of Embedded Scene
 

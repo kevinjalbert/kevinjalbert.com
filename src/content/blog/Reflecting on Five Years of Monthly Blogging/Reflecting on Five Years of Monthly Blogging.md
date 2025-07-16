@@ -73,7 +73,7 @@ The following image is a snapshot of the five years in google Analytics. I take 
 
 ## Following Referrals
 
-It is nice to see _where_ my content is reaching, and the following image shows how users are finding my content from a referral perspective. When drilling into specifics, it's rewarding to see one of my blog posts ending up in a [GitHub issue](https://github.com/chatwoot/chatwoot/pull/1134#issue-466028793), [StackOverflow answer](https://stackoverflow.com/questions/7298088/def-block-in-rake-task), or [blog post](https://tshaped.io/zapier-and-notion/).
+It is nice to see _where_ my content is reaching, and the following image shows how users are finding my content from a referral perspective. When drilling into specifics, it's rewarding to see one of my blog posts ending up in a [GitHub issue](https://github.com/chatwoot/chatwoot/pull/1134#issue-466028793), [StackOverflow answer](https://stackoverflow.com/a/44294243), or [blog post](https://web.archive.org/web/20210317160207/https://tshaped.io/zapier-and-notion/).
 
 ![Blog Referrals](assets/blog-referrals.png)
 

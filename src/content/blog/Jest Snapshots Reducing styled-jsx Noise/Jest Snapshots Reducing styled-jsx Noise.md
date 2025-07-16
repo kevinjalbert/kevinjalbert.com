@@ -17,7 +17,7 @@ heroImageAlt: >-
 permalink: jest-snapshots-reducing-styled-jsx-noise
 ---
 
-Facebook's [Jest](https://facebook.github.io/jest/) is a powerful testing framework for JavaScript. It works _out of the box_ for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the [snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage's documentation:
+Facebook's [Jest](https://jestjs.io/) is a powerful testing framework for JavaScript. It works _out of the box_ for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the [snapshot testing](https://jestjs.io/docs/snapshot-testing) functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage's documentation:
 
 > Capture snapshots of React trees or other serializable values to simplify testing and to analyze how state changes over time.
 
@@ -317,7 +317,7 @@ FAIL  src/App.test.js
     at Object.<anonymous> (src/App.test.js:5:12)
 ```
 
-We can recover from this error, if we use a [Jest manual mocks](https://facebook.github.io/jest/docs/en/manual-mocks.html) to mock out the `css` tagged template literal. We can accomplish this by creating the following mock under `__mocks__/styled-jsx/css.js`:
+We can recover from this error, if we use a [Jest manual mocks](https://jestjs.io/docs/manual-mocks) to mock out the `css` tagged template literal. We can accomplish this by creating the following mock under `__mocks__/styled-jsx/css.js`:
 
 ```js
 function css() {
@@ -365,4 +365,4 @@ This is a great outcome given that the use of `enzyme` is common in the React te
   - See clean snapshots when using `react-test-renderer`
   - See clean snapshots when using `enzyme`
 
-There might be a better way to handle this, but as of the time this article was written I have yet to see a clean approach. One thing I noticed was a [GitHub comment](https://github.com/zeit/styled-jsx/issues/117#issuecomment-342115323) that alluded to a better method that would follow a similar strategy to [jest-styled-components](https://github.com/styled-components/jest-styled-components) but for `styled-jsx`.
+There might be a better way to handle this, but as of the time this article was written I have yet to see a clean approach. One thing I noticed was a [GitHub comment](https://github.com/vercel/styled-jsx/issues/117#issuecomment-342115323) that alluded to a better method that would follow a similar strategy to [jest-styled-components](https://github.com/styled-components/jest-styled-components) but for `styled-jsx`.

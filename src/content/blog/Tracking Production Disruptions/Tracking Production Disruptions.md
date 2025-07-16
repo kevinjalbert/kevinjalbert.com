@@ -43,7 +43,7 @@ Without any tracking, it becomes a huge failure if the same disruption happens a
 
 # Tracking
 
-One thing to note is that the following is from experience that I have working at [theScore](http://company.thescore.com/), along with reading various sources online. Let us touch on what to track, where to track, and how to track.
+One thing to note is that the following is from experience that I have working at [theScore](https://www.scoremediaandgaming.com/about), along with reading various sources online. Let us touch on what to track, where to track, and how to track.
 
 ## What to Track?
 

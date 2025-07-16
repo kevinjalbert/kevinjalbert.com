@@ -38,7 +38,7 @@ Archiving channels doesn't have to be perfect, although there will be clear choi
 
 # Types of Channels
 
-Channels tend to fall under specific categories that define their behaviour or purpose. For example, [Slack provides a guideline](https://slack.global.ssl.fastly.net/5ccb/pdfs/admins_guide.pdf) on what these channel types are:
+Channels tend to fall under specific categories that define their behaviour or purpose. For example, [Slack provides a guideline](https://slack.com/resources/using-slack/how-to-organize-your-slack-channels) on what these channel types are:
 
 ## Global
 
@@ -101,7 +101,7 @@ While these channels do provide topical information on their specific topics, we
 
 ## Birth of Engineering Topical Channels
 
-We were doing some recent work with [React](https://facebook.github.io/react/) and [GraphQL](http://graphql.org/), and we saw the birth of two engineering topical channels:
+We were doing some recent work with [React](https://react.dev/) and [GraphQL](http://graphql.org/), and we saw the birth of two engineering topical channels:
 
   * _#graphql_
   * _#react_
@@ -131,4 +131,3 @@ Now at theScore, this is our plan in improving our usage of Slack channels:
   6. Create a _#meta_ channel (along with a note to some channel conventions)
 
 With routine maintenance, we will keep our Slack channels focused and organized. Hopefully we will see the benefit to education/knowledge sharing with the increased organization of our chat channels.
-

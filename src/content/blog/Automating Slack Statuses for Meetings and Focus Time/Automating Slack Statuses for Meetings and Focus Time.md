@@ -53,7 +53,7 @@ You could possibly mitigate this with some clever status text (i.e., "Meeting fr
 
 # Automating Slack Status For Focus Time
 
-Another place I automate Slack statuses is for focus time. While at work, there are times I need a deep focus time (i.e., being in the _zone_). I use [PomoDoneApp](https://pomodoneapp.com/) as my [Pomodoro](https://francescocirillo.com/pages/pomodoro-technique) application of choice. Fortunately for me, it also interfaces with Zapier.
+Another place I automate Slack statuses is for focus time. While at work, there are times I need a deep focus time (i.e., being in the _zone_). I use [PomoDoneApp](https://pomodoneapp.com/) as my [Pomodoro](https://www.pomodorotechnique.com/) application of choice. Fortunately for me, it also interfaces with Zapier.
 
 The goal here is for colleagues to know that I'm busy and might not get back to their messages until I have a break from my deep work.
 

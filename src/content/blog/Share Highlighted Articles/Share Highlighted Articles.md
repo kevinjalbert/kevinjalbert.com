@@ -33,13 +33,13 @@ I reviewed four highlighting services to find the best one that fits my needs. I
 
 ## [Liner](https://getliner.com)
 
-Liner is a solid option for highlighting. The chrome extension works very well and is boiled down to the fundamentals: highlighting and comments. It offers a Pocket integration, which is nice, although not really needed. The ability to export highlights to Evernote is excellent, and as an off the shelf solution does what I need. The iOS application also is well done and works as expected. The sharing feature provides a link which renders the full article with highlightings in it, simple and effective -- [example Liner shared link](http://lnr.li/PbYky).
+Liner is a solid option for highlighting. The chrome extension works very well and is boiled down to the fundamentals: highlighting and comments. It offers a Pocket integration, which is nice, although not really needed. The ability to export highlights to Evernote is excellent, and as an off the shelf solution does what I need. The iOS application also is well done and works as expected. The sharing feature provides a link which renders the full article with highlightings in it, simple and effective.
 
 Even though there is a subscription at $5/month or $50/year, it is not really necessary. You get folder support along with, more colours and advance search. The colours I couldn't really care for, and the search will be covered by Evernote. Folders are also unimportant to me. Overall this means I don't have to pay for this service.
 
 I really like Liner, and it almost made my pick. It satisfies all my needs, although it became my second choice as the next service Highly has a very neat _social_ feature.
 
-## [Highly](https://www.highly.co)
+## Highly (defunct)
 
 Highly is very similar to Liner in terms of highlighting. It is, even more, streamline as it only offers highlights and drops comments. The main benefit I noticed with Highly is the [Highlight Layer](https://medium.com/highlight-to-share/the-highlight-layer-45b9a8e86476), which when you browse articles provides a social aspect to highlighting. This is pretty awesome as I can see a summary of new articles assuming someone has marked it up before me. In addition, the interface of the extension I would argue is slightly better than Liner. Highly also offers a Pocket integration like Liner. The iOS application for highlighting is also quite nice and offers a great user experience.
 
@@ -49,7 +49,7 @@ I was pleasantly surprised with the highlighting experience, considering I didn'
 
 ![[assets/highly-smart-highlighting.gif|Smart Highlighting by Highly]]
 
-In contrast to how Liner displays the whole page with highlights when you share a link, Highly provides a summary page -- [example Highly shared link](https://www.highly.co/hl/FJrJO5TzhZt7d3). You can always drop into the context of the whole page, but this only works if you have the extension installed otherwise you get a prompt to install it.
+In contrast to how Liner displays the whole page with highlights when you share a link, Highly provides a summary page. You can always drop into the context of the whole page, but this only works if you have the extension installed otherwise you get a prompt to install it.
 
 Highly does offer a subscription as well for $2/month or $20/year, but all you get is private highlights. To me, that doesn't matter since I want everything to be public, and out in the open for others to benefit from.
 
@@ -127,4 +127,4 @@ Now armed with my highlighter I can mark the good parts that I feel are most imp
 
 My goal is to highlight every article that lands in my Pocket. With Highly's social aspects I hope that my highlights help future readers. In a similar fashion, I am always pleased when I see that someone else has already highlighted an article for the key points.
 
-Make sure to check out my highlights and [follow me on Highly](https://www.highly.co/by/kevinjalbert)
+~~Make sure to check out my highlights and follow me on Highly.~~ Highly is defunct, and I use [Readwise](https://readwise.io/) now.

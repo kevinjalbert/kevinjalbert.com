@@ -57,7 +57,7 @@ We can see that that the `ping` command still works as expected, but we also now
 
 # Wrapping a Function
 
-The approaches for dealing with a function were mostly borrowed from this [Unix StackExchange answer](https://unix.stackexchange.com/questions/102595/is-there-a-hook-like-system-for-shell/102626#102626).
+The approaches for dealing with a function were mostly borrowed from this [Unix StackExchange answer](https://unix.stackexchange.com/a/102626).
 
 ```bash
 # Not a function I have defined (i.e., defined in a library I sourced)

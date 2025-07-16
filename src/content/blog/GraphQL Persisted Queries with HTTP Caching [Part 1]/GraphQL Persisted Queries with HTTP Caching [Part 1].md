@@ -29,7 +29,7 @@ GraphQL presents a flexible endpoint to which clients can send queries, however,
 
 As a consumer of a GraphQL API, it possible to construct _any query_ for the server to process. You can hope that the consumers are doing their best to create good queries, but in a public API that might not be the case. You might have ill-informed users creating very expensive queries, or even a bad actor trying to timeout or cripple your server by sending deeply cyclical queries.
 
-There are several ways to mitigate these issues, as further outlined by [Max Stoiber's](https://twitter.com/mxstbr) article on [_Securing Your GraphQL API from Malicious Queries_](https://dev-blog.apollodata.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b). In particular:
+There are several ways to mitigate these issues, as further outlined by [Max Stoiber's](https://x.com/mxstbr) article on [_Securing Your GraphQL API from Malicious Queries_](https://www.apollographql.com/blog/securing-your-graphql-api-from-malicious-queries). In particular:
  - _Depth Limiting_: Rejecting queries which are too deeply nested
  - _Amount Limiting_: Rejecting queries which ask for too much information (i.e., via pagination arguments)
  - _Query Cost Analysis_: Rejecting queries which are too expensive (by assigning complexity values to fields)
@@ -39,7 +39,7 @@ I would like to also add _Time Limiting_, which would reject queries that take t
 
 # Persisted Queries
 
-[Facebook has been using persisted queries since 2013](https://twitter.com/leeb/status/829434814402945026), and comes highly recommended for production usage from them. The essence of a persisted query is that the query is _persisted_ on the server's side and that a client can _reference_ it using some unique identifier. A great primer on persisted queries can be found on [Apollo's blog article for this topic](https://dev-blog.apollodata.com/persisted-graphql-queries-with-apollo-client-119fd7e6bba5).
+[Facebook has been using persisted queries since 2013](https://x.com/leeb/status/829434814402945026), and comes highly recommended for production usage from them. The essence of a persisted query is that the query is _persisted_ on the server's side and that a client can _reference_ it using some unique identifier. A great primer on persisted queries can be found on [Apollo's blog article for this topic](https://www.apollographql.com/blog/persisted-graphql-queries).
 
 For the sake of completeness, I want to demonstrate a scenario where persisted queries shine.
 
@@ -92,7 +92,7 @@ In our specific case, we can use persisted queries to remedy the issue of malici
 
 That sounds great, but how can we go about implementing this? As previously mentioned, persisted queries are not part of the official specification. There are many implementations that exist, as well as some tooling for supporting persisted queries. In my experience at the time of writing this, there wasn't a standard way to implement persisted queries.
 
-I want to stress the following: **Persisted Queries only work if you control the server and the client**. In theory, you could use persisted queries on public APIs, although the _security_ gains are not present. I do want to mention that [Automatic Persisted Queries](https://dev-blog.apollodata.com/improve-graphql-performance-with-automatic-persisted-queries-c31d27b8e6ea) is one way which uses the concept of persisted queries solely for performance gains.
+I want to stress the following: **Persisted Queries only work if you control the server and the client**. In theory, you could use persisted queries on public APIs, although the _security_ gains are not present. I do want to mention that [Automatic Persisted Queries](https://www.apollographql.com/blog/improve-graphql-performance-with-automatic-persisted-queries) is one way which uses the concept of persisted queries solely for performance gains.
 
 # Implementing GraphQL Persisted Queries with HTTP Caching
 

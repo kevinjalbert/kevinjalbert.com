@@ -52,7 +52,7 @@ I have been using `port_map` for a little over 6 months (as of writing this), an
 
 There was one issue that I have hit, although its not a deal breaker [kevinjalbert/port_map#7](https://github.com/kevinjalbert/port_map/issues/7), although I suspect I can fix this eventually.
 
-As `port_map` is a wrapper around the command there are interesting issues that can arise. I use [Zsh](http://www.zsh.org/) as my shell along with a bunch of aliases it was necessary for `port_map` to support running commands that contain aliases. I recently moved to [zplug](https://zplug.sh/) as my Zsh plugin framework, where I encountered the following issue [zplug/zplug#209](https://github.com/zplug/zplug/issues/209).
+As `port_map` is a wrapper around the command there are interesting issues that can arise. I use [Zsh](http://www.zsh.org/) as my shell along with a bunch of aliases it was necessary for `port_map` to support running commands that contain aliases. I recently moved to [zplug](https://github.com/zplug/zplug) as my Zsh plugin framework, where I encountered the following issue [zplug/zplug#209](https://github.com/zplug/zplug/issues/209).
 
 One last inconvenience is that `port_map` is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using [rvm](https://rvm.io/)/[rbenv](http://rbenv.org/) sometimes `port_map` is not installed. It is a slight detour to install `port_map` for the current Ruby version when I switch to a new Ruby version. Ideally `port_map` would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).
 

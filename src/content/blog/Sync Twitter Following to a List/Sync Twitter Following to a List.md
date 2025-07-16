@@ -10,9 +10,7 @@ tags:
 pubDate: 2023-01-31T00:00:00.000Z
 heroImage: assets/twitter-list.png
 heroImageAlt: >-
-  Screenshot of my [Twitter
-  List](https://twitter.com/i/lists/1618235532990980096) that I'm subscribed to
-  in Readwise Reader.
+  Screenshot of my Twitter List that I'm subscribed to in Readwise Reader.
 permalink: sync-twitter-following-to-a-list
 ---
 
@@ -26,7 +24,7 @@ This become the forcing function to try [Readwise’s Reader](https://readwise.i
 
 I've recently adopted Reader to help facilitate my consumption of information. It's really a delightful _all-in-one_ application that allows me to collect/filter/consume/highlight content. Reader highlights are instantly sync to [Readwise (referral link)](https://readwise.io/i/kevin862) at no cost as it is bundled into the tool.
 
-With the change in Twitter, I decided to embrace Reader's ability to provide daily summaries of tweets from a [Twitter List](https://help.twitter.com/en/using-twitter/twitter-lists).
+With the change in Twitter, I decided to embrace Reader's ability to provide daily summaries of tweets from a [Twitter List](https://help.x.com/en/using-x/x-lists).
 
 ## Twitter List of Followings
 

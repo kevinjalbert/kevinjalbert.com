@@ -20,7 +20,7 @@ I enjoy having _dedicated tools/applications_ for tasks and tend to keep my brow
 
 ## Web Application -> Desktop Application
 
-I've used [nativefier](https://github.com/jiahaog/nativefier) in the past to create a desktop version of various web applications. Quick searching showed the following [issue](https://github.com/jiahaog/nativefier/issues/207) mentioning that adding a Chrome extention isn't supported, although it is possible to _inject_ custom JavaScript to be executed within the newly created application.
+I've used [nativefier](https://github.com/jiahaog/nativefier) in the past to create a desktop version of various web applications. Quick searching showed the following [issue](https://github.com/nativefier/nativefier/issues/207) mentioning that adding a Chrome extention isn't supported, although it is possible to _inject_ custom JavaScript to be executed within the newly created application.
 
 The following command will build the application while injecting [`src/todoist-shortcuts.js`](https://github.com/mgsloan/todoist-shortcuts/blob/v22/src/todoist-shortcuts.js) in it. The injected file contains all of the keyboard navigation of `todoist-shortcuts`. In addition, other options were provided to `nativefier` so that we have support for badge counts and bouncing the dock icon on changes when out of focus (MacOS).
 
@@ -92,7 +92,7 @@ new MutationObserver(function(mutations) {
 );
 ```
 
-Unfortunately, `nativefier` has an issue with [injecting multiple JavaScript files](https://github.com/jiahaog/nativefier/issues/458). As a workaround, we concatenate the JavaScript into one file before _injecting it_ (which fortunately works with the JavaScript we have).
+Unfortunately, `nativefier` has an issue with [injecting multiple JavaScript files](https://github.com/nativefier/nativefier/issues/458). As a workaround, we concatenate the JavaScript into one file before _injecting it_ (which fortunately works with the JavaScript we have).
 
 ```sh
 #!/bin/bash

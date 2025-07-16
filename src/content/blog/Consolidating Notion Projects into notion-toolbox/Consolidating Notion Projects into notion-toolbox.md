@@ -18,10 +18,10 @@ permalink: consolidating-notion-projects-into-notion-toolbox
 
 For a good part of 2019, I focused heavily on my [Notion[Referral]](https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e) setup. I personally feel that this was time well invested, akin to a craftsman refining his tools.
 
-- I created a [specific weekly/daily template](https://kevinjalbert.com/my-weekly-notion-setup/) to satisfy some of my needs and give structure to Notion.
-- I created an integration with [Alfred](https://www.alfredapp.com/) called [`alfred-notion`](https://github.com/kevinjalbert/alfred-notion) ([blog post](https://kevinjalbert.com/integrating-notion-with-alfred/)).
-- I created a server web application called [`notion-heroku`](https://github.com/kevinjalbert/notion-heroku) that interacts with [IFTTT](https://ifttt.com/) and Google Assistant ([blog post](https://kevinjalbert.com/integrating-notion-with-google-assistant/)).
-- I created a shared repository called [`notion-scripts`](https://github.com/kevinjalbert/notion-scripts) to further help the development of my tooling for Notion ([blog post](https://kevinjalbert.com/introducing-notion-scripts/)).
+- I created a [[../My Weekly Notion Setup/My Weekly Notion Setup|specific weekly/daily template]] to satisfy some of my needs and give structure to Notion.
+- I created an integration with [Alfred](https://www.alfredapp.com/) called [`alfred-notion`](https://github.com/kevinjalbert/alfred-notion) ([[../Integrating Notion with Alfred/Integrating Notion with Alfred|blog post]]).
+- I created a server web application called [`notion-heroku`](https://github.com/kevinjalbert/notion-heroku) that interacts with [IFTTT](https://ifttt.com/) and Google Assistant ([[../Integrating Notion with Google Assistant/Integrating Notion with Google Assistant|blog post]]).
+- I created a shared repository called [`notion-scripts`](https://github.com/kevinjalbert/notion-scripts) to further help the development of my tooling for Notion ([[../Introducing notion-scripts/Introducing notion-scripts|blog post]]).
 
 I recently made the decision to consolidate all my Notion related projects into a single repository. The goal is to increase cohesion to allow the tools to better interact with each other. It also puts everything in one place instead of spreading it out over multiple repositories. This approach does increase the size of the repository and the deployment/usage complexity for certain tools, but overall I feel that this decision will result in an easier way to use and develop with the Notion tools found there.
 
@@ -41,7 +41,7 @@ This is a collection of [Notion](https://www.notion.so/) tools that work in tand
 
 As of the publish date of this post, the following tools are available. Each tool has a README file present in its corresponding sub-directory.
 
-- [Alfred](https://github.com/kevinjalbert/notion-toolbox/tree/master/alfred) workflow
+- [Alfred](https://github.com/kevinjalbert/notion-toolbox/tree/63d8bf16670b44ec355132d5f251e0728fc5cd78/alfred) workflow
   - Enables a handful of ways to interact with the template using shortcuts
 - [Server](https://github.com/kevinjalbert/notion-toolbox/tree/master/server) application
   - Enables an online (and backgrounded) interface to interact with the template

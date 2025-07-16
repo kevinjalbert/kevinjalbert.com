@@ -19,7 +19,7 @@ heroImageAlt: >-
 permalink: archive-unused-repositories
 ---
 
-At the time of writing this article, [theScore](http://company.thescore.com/) has approximately 250 repositories hosted on [GitHub](https://github.com/). The majority of these are private, although some public ones do exist as well. I suspect that software companies of sufficient size eventually accumulate a large number of repositories due to new projects, libraries, experiments, etc. An employee being faced with these numbers can waste a lot of time searching through these repositories and determining whether a repository is actively used.
+At the time of writing this article, [theScore](https://www.scoremediaandgaming.com/about) has approximately 250 repositories hosted on [GitHub](https://github.com/). The majority of these are private, although some public ones do exist as well. I suspect that software companies of sufficient size eventually accumulate a large number of repositories due to new projects, libraries, experiments, etc. An employee being faced with these numbers can waste a lot of time searching through these repositories and determining whether a repository is actively used.
 
 # The Burden
 

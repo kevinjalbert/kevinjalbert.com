@@ -22,8 +22,8 @@ I decided to leverage the [Common Sense Media](https://www.commonsensemedia.org/
 
 I use Plex Meta Manager to do the following tasks on a daily schedule:
 
-- Add the Common Sense Media age rating on each item in the Library using the [Mass Content Rating Update operation](https://metamanager.wiki/en/latest/config/operations.html#mass-content-rating-update).
-- Add an overlay (on the poster art) with the Common Sense Media age rating for each item in the Library using the [CommonSense Age Rating Overlay](https://metamanager.wiki/en/latest/defaults/overlays/commonsense.html#commonsense-age-rating-overlay).
+- Add the Common Sense Media age rating on each item in the Library using the [Mass Content Rating Update operation](https://metamanager.wiki/en/latest/config/operations/#mass-content-rating-update).
+- Add an overlay (on the poster art) with the Common Sense Media age rating for each item in the Library using the [CommonSense Age Rating Overlay](https://metamanager.wiki/en/latest/defaults/overlays/commonsense/).
 
 The following is a slimmed-down snippet of my `config.yml` that adds the Common Sense Media age rating and displays it on the poster art. As you'll see in the example image, there are a lot of other Plex Meta Manager configurations in place to display ratings.
 

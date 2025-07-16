@@ -34,7 +34,7 @@ The idea is that the tablet screen is always on and showing Google Calendar's _t
 
 The position of the tablet is on the main floor near the door to the basement. This spot was picked by my wife, as it is a central location during her day. Being able to view the whole day is important as she can better understand my availability and plan her day as well. She is able to see when meetings start/end, and it also captures those impromptu meetings that are made shortly before they begin.
 
-Could you use a different tablet (like an iPad)? Sure thing, I just worked with what I had around the house. This is a perfect way to put an old tablet to good use as the processing specs don't have to be good. One thing to note with the Fire tablets, you have to [enable the _Always on_ setting](https://vidabox.com/blog/2017/02/11/hidden-always-on-setting-for-amazon-fire-tablets/) as well as [install the Google Play Store](https://www.androidpolice.com/2020/07/11/install-play-store-amazon-fire-tablet/) to get Google Calendar.
+Could you use a different tablet (like an iPad)? Sure thing, I just worked with what I had around the house. This is a perfect way to put an old tablet to good use as the processing specs don't have to be good. One thing to note with the Fire tablets, you have to [enable the _Always on_ setting](https://www.vidabox.com/kiosks/hidden_always_on_setting_for_amazon_fire_tablets_ideal_for_vidamounts) as well as [install the Google Play Store](https://www.androidpolice.com/install-play-store-amazon-fire-tablet/) to get Google Calendar.
 
 # Future Iteration: Indicating in the Basement
 

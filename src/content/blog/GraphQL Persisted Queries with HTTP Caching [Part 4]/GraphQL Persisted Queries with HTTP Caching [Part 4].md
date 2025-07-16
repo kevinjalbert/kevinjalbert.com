@@ -28,7 +28,7 @@ In part four we will cover the following topics:
 There are different ways to _cache_ with GraphQL:
 
  - [Caching on the Apollo client](https://www.apollographql.com/docs/react/advanced/caching.html).
- - [Caching the parsed and validated GraphQL query](http://mgiroux.me/2016/graphql-query-caching-with-rails/).
+ - [Caching the parsed and validated GraphQL query](https://web.archive.org/web/20180201114157/http://mgiroux.me/2016/graphql-query-caching-with-rails/).
  - [Caching field and response resolutions](https://github.com/chatterbugapp/cacheql).
  - Amongst other mechanisms and techniques.
 
@@ -36,7 +36,7 @@ For our situation, we're interested in HTTP caching, and the way to achieve this
 
 The main benefit for HTTP caching is that it allows CDNs and reverse proxy's (i.e., [Varnish](https://varnish-cache.org/)) to cache intermediate responses based on the response's headers (i.e., `Cache-Control`). This results in fewer requests hitting your server as the results might be cached, perfect for scaling your API. Even a short cache (i,e., < 10 seconds) could be extremely valuable as this cache could be shared across all consumers of the API.
 
-I want to bring up an article by [Corey Clark](https://twitter.com/_CoreyClark) which tackles a very similar problem on how to use [`GET` requests with GraphQL Persisted Queries](https://medium.com/@coreyclark/graphql-persisted-queries-using-get-requests-8a6704aba9eb). Both the current post and Corey's article reach a similar state in achieving HTTP cacheability using `GET` requests.
+I want to bring up an article by [Corey Clark](https://x.com/_CoreyClark) which tackles a very similar problem on how to use [`GET` requests with GraphQL Persisted Queries](https://medium.com/@coreyclark/graphql-persisted-queries-using-get-requests-8a6704aba9eb). Both the current post and Corey's article reach a similar state in achieving HTTP cacheability using `GET` requests.
 
 In the following sections, we will augment our Express and Rails servers as well as our React application to use `GET` requests. To simplify things, we're going to apply a simple 10-second cache on all our responses (ideally you could tailor this to the individual query). In addition, we're going to make an assumption that we don't have any personalized data in our query responses.
 
@@ -168,14 +168,13 @@ class GraphqlController < ApplicationController
 
 ## Alternative Caching with Gateways
 
-I didn't mention [Apollo Engine](https://www.apollographql.com/engine), but this is a recent development in the GraphQL caching space. It provides a layer which sits in front of your GraphQL server and handles caching, query execution tracing, and error tracking. It is a paid solution if you need to handle more than 1 million requests per month.
+I didn't mention [Apollo Engine](https://www.apollographql.com/blog/introducing-apollo-engine-insights-error-reporting-and-caching-for-graphql-6a55147f63fc), but this is a recent development in the GraphQL caching space. It provides a layer which sits in front of your GraphQL server and handles caching, query execution tracing, and error tracking. It is a paid solution if you need to handle more than 1 million requests per month.
 
 Part of the secret sauce for caching with Apollo Engine is that it introduced the [Apollo Cache Control](https://github.com/apollographql/apollo-cache-control) GraphQL extension. This allows the GraphQL API to return cache hints on a per field-level. Effectively, this allows the caching to be smarter than simply a blanket solution.
 
-For additional reading on these technologies and techniques, I recommend the following article on [Caching GraphQL Results in your CDN](https://dev-blog.apollodata.com/caching-graphql-results-in-your-cdn-54299832b8e2
-) as it uses Automatic Persisted Queries, Apollo Cache Control, and Apollo Engine.
+For additional reading on these technologies and techniques, I recommend the following article on [Caching GraphQL Results in your CDN](https://www.apollographql.com/blog/caching-graphql-results-in-your-cdn) as it uses Automatic Persisted Queries, Apollo Cache Control, and Apollo Engine.
 
-Another paid solution (if you exceed 5,000 requests per months) is [FastQL](https://fastql.io/). This is a new gateway solution which acts as its own CDN, handling caching and expiration of fields. You are able to manually invalidate field-level caches through an API, or automatically invalidate by sending mutations through their CDN (which expires fields related to the mutation object type).
+Another paid solution (if you exceed 5,000 requests per months) is FastQL (now defunct). This is a new gateway solution which acts as its own CDN, handling caching and expiration of fields. You are able to manually invalidate field-level caches through an API, or automatically invalidate by sending mutations through their CDN (which expires fields related to the mutation object type).
 
 # Reflection
 

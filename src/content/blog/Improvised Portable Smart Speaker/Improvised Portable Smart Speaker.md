@@ -35,7 +35,7 @@ _To note, if I had used another company smart speaker then this might have gone 
 
 I wanted to get Google Assistant outside, as that was the key part of the smart speaker -- responding to voice commands. We're a household of Apple products, except for Google with respect to our house automation aspect. Using our phones wasn't ideal to drive this system -- we'd need a dedicated product.
 
-Looking around led me to the [JBL Link series of Voice-Activated Speakers](https://ca.jbl.com/voice-activated-speaker/), which looked perfect... except for the price ($200+).
+Looking around led me to the [JBL Link series of Voice-Activated Speakers](https://www.jbl.com/link-series/), which looked perfect... except for the price ($200+).
 
 I then realized I had the product in front of me the whole time -- the Google Home Mini.
 
