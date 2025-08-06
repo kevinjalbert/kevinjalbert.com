@@ -34,7 +34,7 @@ function getCleanSlug(post: { data: { permalink: string } }) {
             <div>
               <p class="text-sm text-gray-500 mb-2">Previous Post</p>
               <a
-                href={`/${getCleanSlug(prevPost)}`}
+                href={`/${getCleanSlug(prevPost)}/`}
                 class="block text-blue-600 hover:text-blue-800 transition-colors"
               >
                 <div class="flex items-start space-x-3">
@@ -56,7 +56,7 @@ function getCleanSlug(post: { data: { permalink: string } }) {
             <div>
               <p class="text-sm text-gray-500 mb-2">Next Post</p>
               <a
-                href={`/${getCleanSlug(nextPost)}`}
+                href={`/${getCleanSlug(nextPost)}/`}
                 class="block text-blue-600 hover:text-blue-800 transition-colors"
               >
                 <div class="flex items-start space-x-3 justify-end">

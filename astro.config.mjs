@@ -9,6 +9,9 @@ export default defineConfig({
   // Configure to read content from the parent content directory
   srcDir: './src',
 
+  // Ensure trailing slashes for consistent URLs
+  trailingSlash: 'always',
+
   // Configure markdown processing
   markdown: {
     remarkPlugins: [
@@ -22,7 +25,7 @@ export default defineConfig({
   },
 
   // Configure site settings
-  site: 'https://kevinjalbert.com', // Update with actual domain
+  site: 'https://kevinjalbert.com/', // Update with actual domain
 
   // Configure build output to temp directory (configurable via env var)
   outDir: process.env.ASTRO_OUT_DIR || './dist',

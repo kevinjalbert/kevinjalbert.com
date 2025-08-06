@@ -90,7 +90,7 @@ function getCleanSlug(post) {
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
               <h2 class="text-xl font-semibold flex-1 mb-1 sm:mb-0">
                 <a
-                  href={`/${cleanSlug}`}
+                  href={`/${cleanSlug}/`}
                   class="text-blue-600 hover:text-blue-800 transition-colors"
                 >
                   {post.data.title}
@@ -111,7 +111,7 @@ function getCleanSlug(post) {
               <div class="flex flex-wrap gap-2">
                 {post.data.tags.map(tag => (
                   <a
-                    href={`/tags/${encodeURIComponent(tag)}`}
+                    href={`/tags/${encodeURIComponent(tag)}/`}
                     class="inline-block bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-md hover:bg-gray-200 transition-colors"
                   >
                     {tag}

@@ -16,12 +16,12 @@ export async function GET(context) {
   return rss({
     title: "Kevin Jalbert's Blog",
     description: 'Personal blog about software development, productivity, and technology',
-    site: context.site || 'https://kevinjalbert.com',
+    site: context.site || 'https://kevinjalbert.com/',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: new Date(post.data.pubDate),
       description: post.data.description,
-      link: `/${post.data.permalink}/`,
+      link: `${context.site || 'https://kevinjalbert.com/'}${post.data.permalink}/`,
       categories: post.data.tags || [],
     })),
     customData: `<language>en-us</language>`,

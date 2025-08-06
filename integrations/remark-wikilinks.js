@@ -124,7 +124,7 @@ export default function remarkWikilinks() {
 
           // If it's just a filename, prefix with assets/
           if (!imagePath.includes('/')) {
-            imagePath = `assets/${imagePath}`;
+            imagePath = `assets/${imagePath}/`;
           }
 
           // Remove the ! from the previous text node if it exists
@@ -175,7 +175,7 @@ export default function remarkWikilinks() {
           // Create proper markdown link node
           newNodes.push({
             type: 'link',
-            url: `/${permalink}`,
+            url: `/${permalink}/`,
             title: null,
             children: [{
               type: 'text',

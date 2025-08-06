@@ -44,7 +44,7 @@ const sortedTags = Array.from(tagCounts.entries())
 
         return (
           <a
-            href={`/tags/${tag}`}
+            href={`/tags/${tag}/`}
             class={`inline-flex items-center bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors font-medium ${sizeClasses[scale]}`}
             title={`${count} ${count === 1 ? 'post' : 'posts'}`}
           >
@@ -64,7 +64,7 @@ const sortedTags = Array.from(tagCounts.entries())
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       {sortedTags.map(({ tag, count }) => (
         <a
-          href={`/tags/${tag}`}
+          href={`/tags/${tag}/`}
           class="flex justify-between items-center p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors min-h-[44px]"
         >
           <span class="font-medium text-gray-900 truncate">{tag}</span>

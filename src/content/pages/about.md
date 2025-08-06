@@ -17,4 +17,4 @@ I am currently working at [Shopify](https://www.shopify.ca/about), where I've be
 
 You can find me on [Twitter](https://x.com/KevinJalbert), [GitHub](https://github.com/kevinjalbert).
 
-If you're curious about my setup and the tools I use daily, check out my [uses page](/uses). To see what I'm currently focused on, visit my [now page](/now).
+If you're curious about my setup and the tools I use daily, check out my [uses page](/uses/). To see what I'm currently focused on, visit my [now page](/now/).
