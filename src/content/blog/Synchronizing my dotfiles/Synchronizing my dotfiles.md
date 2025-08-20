@@ -57,7 +57,6 @@ Using Mackup, I can take advantage of:
 * Real-time synchronization of configurations in Dropbox.
 * Private dotfile synchronization in Dropbox.
 
-
 ### Synchronization
 
 Before Mackup, I was using `git pull` and `git push` to synchronize _deliberate_ configuration changes. I would have to manually add files I wanted to synchronize to the dotfile repository, along with the initial symlink. On another machine, I would `git pull` and _reinstall_ to apply the changes.
